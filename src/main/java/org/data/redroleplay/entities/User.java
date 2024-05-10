@@ -3,6 +3,7 @@ package org.data.redroleplay.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Entity
@@ -18,6 +19,10 @@ public class User {
     private String firstName;
 
     private String lastName;
+
+    private String username;
+
+    private LocalDate birthDate;
 
     private String email;
 
