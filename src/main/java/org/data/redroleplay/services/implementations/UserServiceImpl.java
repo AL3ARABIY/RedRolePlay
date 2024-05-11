@@ -35,6 +35,8 @@ public class UserServiceImpl implements UserService {
                         .roles(List.of(new Role("USER")))
                 .build();
 
+
+
         return userRepository.save(user);
     }
 
@@ -43,6 +45,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByMtaUsername(username);
     }
 
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
     @Override
     public Boolean existsByEmail(String email){
         return userRepository.existsByEmail(email);
