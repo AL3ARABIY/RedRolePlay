@@ -23,12 +23,16 @@ public class User {
 
     private LocalDate birthDate;
 
+    @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
     private String mtaUsername;
 
+    @Column(unique = true)
     private String mtaSerial;
 
+    @Column(unique = true)
     private String discordId;
 
     private String salt;

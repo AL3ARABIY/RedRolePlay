@@ -41,4 +41,24 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByMtaUsername(username);
     }
 
+    @Override
+    public Boolean existsByEmail(String email){
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Boolean existsByMtaUsername(String mtUsername){
+        return userRepository.existsByMtaUsername(mtUsername);
+    }
+
+    @Override
+    public Boolean existsByDiscordId(String discordId){
+        return userRepository.existsByDiscordId(discordId);
+    }
+
+    @Override
+    public Boolean existsByMtaSerial(String mtaSerial){
+        return userRepository.existsByMtaSerial(mtaSerial);
+    }
+
 }
