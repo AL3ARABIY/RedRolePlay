@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    website:
+      jdbcUrl: ${WEBSITE_DATABASE_URL:jdbc:mysql://localhost:3306/RedRolePlay?createDatabaseIfNotExist=true}
+      username: ${WEBSITE_DATABASE_USERNAME:root}
+      password: ${WEBSITE_DATABASE_PASSWORD:}
+      driverClassName: com.mysql.cj.jdbc.Driver
+    game:
+      jdbcUrl: ${GAME_DATABASE_URL:}
+      username: ${GAME_DATABASE_USERNAME:}
+      password: ${GAME_DATABASE_PASSWORD:}
+      driverClassName: com.mysql.cj.jdbc.Driver
+
+
