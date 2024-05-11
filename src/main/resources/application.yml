@@ -4,9 +4,9 @@ token:
 
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/RedRolePlay?createDatabaseIfNotExist=true}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:}
 
   jpa:
     properties:
