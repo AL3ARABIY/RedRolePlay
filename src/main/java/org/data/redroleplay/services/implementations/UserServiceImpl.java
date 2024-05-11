@@ -26,6 +26,8 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                         .email(registrationDto.getEmail())
                         .mtaUsername(registrationDto.getMtaUsername())
+                        .mtaSerial(registrationDto.getMtaSerial())
+                        .discordId(registrationDto.getDiscordId())
                         .firstName(registrationDto.getFirstName())
                         .lastName(registrationDto.getLastName())
                         .birthDate(registrationDto.getBirthDate())

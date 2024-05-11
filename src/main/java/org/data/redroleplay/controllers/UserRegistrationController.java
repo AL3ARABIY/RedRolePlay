@@ -4,13 +4,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.UserRegistrationDto;
 import org.data.redroleplay.services.UserService;
+import org.data.redroleplay.validators.UserValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/registration")
@@ -18,6 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserRegistrationController {
 
     private final UserService userService;
+
+    private final UserValidator userValidator;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(userValidator);
+    }
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
@@ -35,6 +41,8 @@ public class UserRegistrationController {
             BindingResult result,
             Model model
     ) {
+
+        userValidator.validate(registrationDto, result);
 
         if(result.hasErrors()) {
             return "registration";

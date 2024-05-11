@@ -65,6 +65,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="control-label" for="discordId"> Discord Id </label> <input
+                        id="discordId" class="form-control" type="number" th:field="*{discordId}"
+                        required autofocus="autofocus" />
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('discordId')}" th:errors="*{discordId}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="mtaSerial"> Mta Serial </label> <input
+                        id="mtaSerial" class="form-control" th:field="*{mtaSerial}"
+                        required autofocus="autofocus" />
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('mtaSerial')}" th:errors="*{mtaSerial}"></div>
+                </div>
+
+                <div class="form-group">
                     <label class="control-label" for="birthDate"> BirthDate </label> <input
                         id="birthDate" class="form-control" type="date" th:field="*{birthDate}"
                         required autofocus="autofocus" />

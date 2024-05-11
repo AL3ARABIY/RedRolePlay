@@ -1,5 +1,6 @@
 package org.data.redroleplay.dtos;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +29,16 @@ public class UserRegistrationDto {
     @NotBlank(message = "Field can not be blank")
     @Pattern(regexp = "^[a-zA-Z0-9]{3,}$", message = "MTA username must contain at least 3 characters and contain only letters and digits")
     private String mtaUsername;
+
+    @NotNull(message = "MTA serial is required")
+    @NotBlank(message = "Field can not be blank")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "MTA serial must contain only letters and digits")
+    private String mtaSerial;
+
+    @NotNull(message = "Discord ID is required")
+    @NotBlank(message = "Field can not be blank")
+    @Pattern(regexp = "^[0-9]{18}$", message = "Discord ID must contain exactly 18 digits")
+    private String discordId;
 
     @NotNull(message = "Birth date is required")
     @Past(message = "Birth date must be in the past")
