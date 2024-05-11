@@ -38,7 +38,7 @@ public class DatabaseConfig {
                 .persistenceUnit("website")
                 .properties(
                         Map.of(
-                                "hibernate.hbm2ddl.auto", "create",
+                                "hibernate.hbm2ddl.auto", "update",
                                 "hibernate.dialect", "org.hibernate.dialect.MySQLDialect"
                         )
                 )

@@ -42,8 +42,6 @@ public class UserRegistrationController {
             Model model
     ) {
 
-        userValidator.validate(registrationDto, result);
-
         if(result.hasErrors()) {
             return "registration";
         }
