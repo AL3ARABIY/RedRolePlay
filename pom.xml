@@ -10,12 +10,13 @@
     </parent>
     <groupId>org.data</groupId>
     <artifactId>RedRolePlay</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>V1.0.0</version>
     <name>RedRolePlay</name>
     <description>RedRolePlay</description>
     <properties>
         <java.version>21</java.version>
     </properties>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -74,6 +75,7 @@
     </dependencies>
 
     <build>
+        <finalName>RedRolePlay</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
