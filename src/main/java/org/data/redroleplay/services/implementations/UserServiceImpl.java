@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
         User user = User.builder()
                         .email(registrationDto.getEmail())
-                        .username(registrationDto.getUsername())
+                        .mtaUsername(registrationDto.getUsername())
                         .firstName(registrationDto.getFirstName())
                         .lastName(registrationDto.getLastName())
                         .birthDate(registrationDto.getBirthDate())
