@@ -28,22 +28,18 @@ public class SecurityConfig  {
         return http
                 .authorizeHttpRequests(
                         request -> request
-                                .requestMatchers("/registration**").permitAll()
-                                .requestMatchers("/js/**").permitAll()
-                                .requestMatchers("/css/**").permitAll()
-                                .requestMatchers("/img/**").permitAll()
+                                .requestMatchers("/","/login","/logout", "/registration**").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .permitAll().and().build();
+                .formLogin(login -> login.loginPage("/login"))
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                )
+                .build();
     }
 
     @Bean
