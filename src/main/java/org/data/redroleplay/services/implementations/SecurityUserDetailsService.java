@@ -1,8 +1,8 @@
 package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
-import org.data.redroleplay.entities.Role;
-import org.data.redroleplay.entities.User;
+import org.data.redroleplay.entities.website.Role;
+import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.services.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

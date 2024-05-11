@@ -2,8 +2,8 @@ package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.UserRegistrationDto;
-import org.data.redroleplay.entities.Role;
-import org.data.redroleplay.entities.User;
+import org.data.redroleplay.entities.website.Role;
+import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.repositories.UserRepository;
 import org.data.redroleplay.services.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

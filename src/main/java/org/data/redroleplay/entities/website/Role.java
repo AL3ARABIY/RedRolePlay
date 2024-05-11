@@ -1,4 +1,4 @@
-package org.data.redroleplay.entities;
+package org.data.redroleplay.entities.website;
 
 import jakarta.persistence.*;
 import lombok.*;

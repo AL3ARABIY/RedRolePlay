@@ -1,7 +1,7 @@
 package org.data.redroleplay.services;
 
 import org.data.redroleplay.dtos.UserRegistrationDto;
-import org.data.redroleplay.entities.User;
+import org.data.redroleplay.entities.website.User;
 
 import java.util.Optional;
 

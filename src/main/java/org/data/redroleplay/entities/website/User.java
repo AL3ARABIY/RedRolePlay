@@ -1,4 +1,4 @@
-package org.data.redroleplay.entities;
+package org.data.redroleplay.entities.website;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,6 +12,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,11 +21,17 @@ public class User {
 
     private String lastName;
 
-    private String username;
-
     private LocalDate birthDate;
 
     private String email;
+
+    private String mtaUsername;
+
+    private String mtaSerial;
+
+    private String discordId;
+
+    private String salt;
 
     private String password;
 
