@@ -6,3 +6,6 @@
 
 ### Simple CRUD:
 - Video: https://www.youtube.com/watch?v=6zfIxgaVkQI
+
+### Form Validation:
+- Article: https://stackabuse.com/spring-boot-thymeleaf-form-data-validation-with-bean-validator/
