@@ -1,11 +1,13 @@
 package org.data.redroleplay.services.implementations;
 
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.UserRegistrationDto;
 import org.data.redroleplay.entities.website.Role;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.repositories.UserRepository;
 import org.data.redroleplay.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
         User user = User.builder()
                         .email(registrationDto.getEmail())
-                        .mtaUsername(registrationDto.getUsername())
+                        .mtaUsername(registrationDto.getMtaUsername())
                         .firstName(registrationDto.getFirstName())
                         .lastName(registrationDto.getLastName())
                         .birthDate(registrationDto.getBirthDate())
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByMtaUsername(username);
     }
 
 }
