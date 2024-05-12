@@ -41,7 +41,7 @@ public class WebSiteDataSourceConfig {
                 .persistenceUnit("website")
                 .properties(
                         Map.of(
-                                "hibernate.hbm2ddl.auto", "update",
+                                "hibernate.hbm2ddl.auto", "create",
                                 "hibernate.dialect", "org.hibernate.dialect.MySQLDialect"
                         )
                 )
