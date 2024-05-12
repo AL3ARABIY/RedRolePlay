@@ -62,6 +62,8 @@ public class UserRegistrationController {
             userRegistrationDto.setDiscordId(discordUser.getId());
             model.addAttribute("ShowRegistrationForm", true);
             model.addAttribute("user", userRegistrationDto);
+            String avatarUrl = String.format("https://cdn.discordapp.com/avatars/%s/%s", discordUser.getId(), discordUser.getAvatar());
+            model.addAttribute("AvatarUrl", avatarUrl);
         }, () -> {
             model.addAttribute("ShowFailingMessage", true);
         });

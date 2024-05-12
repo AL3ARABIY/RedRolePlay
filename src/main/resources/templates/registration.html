@@ -50,6 +50,8 @@
                 Failed to get data from Discord
             </p>
 
+            <img th:if="${ShowRegistrationForm == true}" th:src="${AvatarUrl}" class="img-fluid rounded-circle" alt="Circular Image">
+
             <form th:if="${ShowRegistrationForm == true}" th:action="@{/registration}" method="post" th:object="${user}">
                 <div class="form-group">
                     <label class="control-label" for="firstName"> First Name </label>
