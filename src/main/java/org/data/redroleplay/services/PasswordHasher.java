@@ -6,5 +6,5 @@ public interface PasswordHasher {
 
     String generateSalt();
 
-    String generateHashedPassword(String password, String salt)
+    String generateHashedPassword(String password, String salt);
 }

@@ -1,14 +1,12 @@
 package org.data.redroleplay.services.implementations;
 
-import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.UserRegistrationDto;
 import org.data.redroleplay.entities.website.Role;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.repositories.UserRepository;
+import org.data.redroleplay.services.PasswordHasher;
 import org.data.redroleplay.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +18,16 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final PasswordHasher passwordHasher;
+
     @Override
     public User save(UserRegistrationDto registrationDto) {
+
+        String salt = passwordHasher.generateSalt();
+
+        String hashedPassword = passwordHasher.generateHashedPassword(
+                registrationDto.getPassword(), salt
+        );
 
         User user = User.builder()
                         .email(registrationDto.getEmail())
@@ -31,11 +37,10 @@ public class UserServiceImpl implements UserService {
                         .firstName(registrationDto.getFirstName())
                         .lastName(registrationDto.getLastName())
                         .birthDate(registrationDto.getBirthDate())
-                        .password(new BCryptPasswordEncoder().encode(registrationDto.getPassword()))
+                        .password(hashedPassword)
+                        .salt(salt)
                         .roles(List.of(new Role("USER")))
                 .build();
-
-
 
         return userRepository.save(user);
     }

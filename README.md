@@ -9,3 +9,6 @@
 
 ### Form Validation:
 - Article: https://stackabuse.com/spring-boot-thymeleaf-form-data-validation-with-bean-validator/
+
+### MD5 Password Encryption:
+- Article: https://www.baeldung.com/java-md5
