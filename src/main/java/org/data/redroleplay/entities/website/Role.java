@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(schema = "website")
 public class Role {
 
     @Id

@@ -20,7 +20,8 @@ import java.util.Map;
 @EnableTransactionManagement
 @EnableJpaRepositories(
         basePackages = "org.data.redroleplay.repositories.game",
-        entityManagerFactoryRef = "gameEntityManagerFactory"
+        entityManagerFactoryRef = "gameEntityManagerFactory",
+        transactionManagerRef = "gameTransactionManager"
 )
 public class GameDataSourceConfig {
 
@@ -39,8 +40,8 @@ public class GameDataSourceConfig {
                 .persistenceUnit("game")
                 .properties(
                         Map.of(
-                                "hibernate.hbm2ddl.auto", "create",
-                                "hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect"
+                                "hibernate.hbm2ddl.auto", "none",
+                                "hibernate.dialect", "org.hibernate.dialect.MySQLDialect"
                         )
                 )
                 .build();

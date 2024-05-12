@@ -21,27 +21,28 @@ import java.util.Map;
 @EnableTransactionManagement
 @EnableJpaRepositories(
           basePackages = "org.data.redroleplay.repositories.website",
-          entityManagerFactoryRef = "entityManagerFactory"
+          entityManagerFactoryRef = "webSiteEntityManagerFactory",
+          transactionManagerRef = "webSiteTransactionManager"
 )
 public class WebSiteDataSourceConfig {
     @Primary
-    @Bean(name = "dataSource")
+    @Bean(name = "webSiteDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.website")
     public DataSource websiteDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Primary
-    @Bean(name = "entityManagerFactory")
+    @Bean(name = "webSiteEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean websiteEntityManagerFactory(
-            EntityManagerFactoryBuilder builder, @Qualifier("dataSource") DataSource dataSource) {
+            EntityManagerFactoryBuilder builder, @Qualifier("webSiteDataSource") DataSource dataSource) {
         return builder
                 .dataSource(dataSource)
                 .packages("org.data.redroleplay.entities.website")
                 .persistenceUnit("website")
                 .properties(
                         Map.of(
-                                "hibernate.hbm2ddl.auto", "create",
+                                "hibernate.hbm2ddl.auto", "update",
                                 "hibernate.dialect", "org.hibernate.dialect.MySQLDialect"
                         )
                 )
@@ -49,9 +50,9 @@ public class WebSiteDataSourceConfig {
     }
 
     @Primary
-    @Bean(name = "transactionManager")
+    @Bean(name = "webSiteTransactionManager")
     public PlatformTransactionManager websiteTransactionManager(
-            @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
+            @Qualifier("webSiteEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

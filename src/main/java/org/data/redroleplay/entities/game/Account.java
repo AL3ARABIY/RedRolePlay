@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "accounts")
+@Table(name = "accounts" , schema = "game")
 public class Account {
 
     @Id

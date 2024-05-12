@@ -11,6 +11,7 @@ import java.util.Collection;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(schema = "website")
 public class User {
 
     @Id
