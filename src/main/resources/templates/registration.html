@@ -42,7 +42,15 @@
 
             <h1>Registration</h1>
 
-            <form th:action="@{/registration}" method="post" th:object="${user}">
+            <a th:if="${ShowDiscordButton == true}" th:href="${authorizationUri}" type="button">
+                Login with Discord
+            </a>
+
+            <p th:if="${ ShowFailingMessage == true}">
+                Failed to get data from Discord
+            </p>
+
+            <form th:if="${ShowRegistrationForm == true}" th:action="@{/registration}" method="post" th:object="${user}">
                 <div class="form-group">
                     <label class="control-label" for="firstName"> First Name </label>
                     <input id="firstName" class="form-control" th:field="*{firstName}"
@@ -104,6 +112,7 @@
                     <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
