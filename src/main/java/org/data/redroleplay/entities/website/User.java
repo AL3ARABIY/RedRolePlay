@@ -26,6 +26,8 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    private String password;
+
     @Column(unique = true)
     private String mtaUsername;
 
@@ -37,7 +39,7 @@ public class User {
 
     private String salt;
 
-    private String password;
+    private String mtaPassword;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(

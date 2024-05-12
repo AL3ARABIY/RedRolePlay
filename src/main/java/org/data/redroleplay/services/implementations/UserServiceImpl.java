@@ -7,6 +7,7 @@ import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.repositories.UserRepository;
 import org.data.redroleplay.services.PasswordHasher;
 import org.data.redroleplay.services.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +38,8 @@ public class UserServiceImpl implements UserService {
                         .firstName(registrationDto.getFirstName())
                         .lastName(registrationDto.getLastName())
                         .birthDate(registrationDto.getBirthDate())
-                        .password(hashedPassword)
+                        .password(new BCryptPasswordEncoder().encode(registrationDto.getPassword()))
+                        .mtaPassword(hashedPassword)
                         .salt(salt)
                         .roles(List.of(new Role("USER")))
                 .build();

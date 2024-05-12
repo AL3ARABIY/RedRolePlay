@@ -18,7 +18,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = Account.builder()
                 .email(user.getEmail())
                 .username(user.getMtaUsername())
-                .password(user.getPassword())
+                .password(user.getMtaPassword())
                 .salt(user.getSalt())
                 .discordId(user.getDiscordId())
                 .mtaSerial(user.getMtaSerial())
