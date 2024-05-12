@@ -3,7 +3,7 @@ package org.data.redroleplay.services.implementations;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.entities.game.Account;
 import org.data.redroleplay.entities.website.User;
-import org.data.redroleplay.repositories.AccountRepository;
+import org.data.redroleplay.repositories.game.AccountRepository;
 import org.data.redroleplay.services.AccountService;
 import org.springframework.stereotype.Service;
 

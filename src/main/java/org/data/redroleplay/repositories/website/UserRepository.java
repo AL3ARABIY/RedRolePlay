@@ -1,4 +1,4 @@
-package org.data.redroleplay.repositories;
+package org.data.redroleplay.repositories.website;
 
 import org.data.redroleplay.entities.website.User;
 import org.springframework.data.jpa.repository.JpaRepository;
