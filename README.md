@@ -12,3 +12,6 @@
 
 ### MD5 Password Encryption:
 - Article: https://www.baeldung.com/java-md5
+
+### Multiple Data Sources:
+- Video: https://www.youtube.com/watch?v=mIFIb_JE47U&t=21s

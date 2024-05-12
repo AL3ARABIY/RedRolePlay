@@ -5,10 +5,12 @@ import org.data.redroleplay.dtos.UserRegistrationDto;
 import org.data.redroleplay.entities.website.Role;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.repositories.website.UserRepository;
+import org.data.redroleplay.services.AccountService;
 import org.data.redroleplay.services.PasswordHasher;
 import org.data.redroleplay.services.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,11 +23,13 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordHasher passwordHasher;
 
+    private final AccountService accountService;
+
     @Override
+    @Transactional
     public User save(UserRegistrationDto registrationDto) {
 
         String salt = passwordHasher.generateSalt();
-
         String hashedPassword = passwordHasher.generateHashedPassword(
                 registrationDto.getPassword(), salt
         );
@@ -44,7 +48,11 @@ public class UserServiceImpl implements UserService {
                         .roles(List.of(new Role("USER")))
                 .build();
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        accountService.save(savedUser);
+
+        return savedUser;
     }
 
     @Override

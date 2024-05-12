@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String email;
@@ -24,6 +25,7 @@ public class Account {
     @Column(name = "mtaserial")
     private String mtaSerial;
 
+    @Column(name = "discord_id")
     private String discordId;
 
     private String salt;
