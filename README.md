@@ -16,3 +16,6 @@
 ### Multiple Data Sources:
 - Video: https://www.youtube.com/watch?v=mIFIb_JE47U&t=21s
 - Article: https://springframework.guru/how-to-configure-multiple-data-sources-in-a-spring-boot-application/
+
+### Max Http header size
+- Article: https://www.baeldung.com/spring-boot-max-http-header-size

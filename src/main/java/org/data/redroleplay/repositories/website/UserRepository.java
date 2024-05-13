@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByDiscordId(String discordId);
 
     Boolean existsByMtaSerial(String mtaSerial);
+
+    Boolean existsByDiscordUsername(String discordUsername);
 }

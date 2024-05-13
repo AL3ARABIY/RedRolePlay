@@ -30,7 +30,9 @@ public class AccountServiceImpl implements AccountService {
                 .password(user.getMtaPassword())
                 .salt(user.getSalt())
                 .discordId(user.getDiscordId())
+                .discordUsername(user.getDiscordUsername())
                 .mtaSerial(user.getMtaSerial())
+                .registerDate(user.getRegisterDate())
                 .build();
 
         return accountRepository.save(account);
