@@ -1,0 +1,117 @@
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head th:replace="template :: header"></head>
+<body>
+
+    <nav th:replace="template :: navbar"></nav>
+
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+                <h1>Registration</h1>
+
+                <a th:if="${ShowDiscordButton == true}" th:href="${authorizationUri}" type="button">
+                    Login with Discord
+                </a>
+
+                <p th:if="${ ShowFailingMessage == true}">
+                    Failed to get data from Discord
+                </p>
+
+                <form th:if="${ShowRegistrationForm == true}" th:action="@{/registration}" method="post" th:object="${user}">
+
+                    <div class="form-group">
+                        <label class="control-label" for="discordAvatar"> Discord Avatar </label>
+                        <img th:src="${user.discordAvatar}" class="img-fluid rounded-circle" alt="Circular Image" height="25" width="25">
+                        <input id="discordAvatar" class="form-control" th:field="*{discordAvatar}"
+                               required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordAvatar')}" th:errors="*{discordAvatar}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="firstName"> First Name </label>
+                        <input id="firstName" class="form-control" th:field="*{firstName}"
+                               required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="lastName"> Last Name </label> <input
+                            id="lastName" class="form-control" th:field="*{lastName}"
+                            required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="username"> Mta Username </label> <input
+                            id="username" class="form-control" th:field="*{mtaUsername}"
+                            required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('mtaUsername')}" th:errors="*{mtaUsername}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="mtaSerial"> Mta Serial </label> <input
+                            id="mtaSerial" class="form-control" th:field="*{mtaSerial}"
+                            required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('mtaSerial')}" th:errors="*{mtaSerial}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="birthDate"> BirthDate </label> <input
+                            id="birthDate" class="form-control" type="date" th:field="*{birthDate}"
+                            required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="password"> Password </label>
+                        <input id="password" class="form-control" type="password" name="password"
+                            th:field="*{password}" required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="email"> Email </label> <input
+                            id="email" class="form-control" th:field="*{email}" required
+                            autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="discordId"> Discord Id </label> <input
+                            id="discordId" class="form-control" type="number" th:field="*{discordId}"
+                            required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordId')}" th:errors="*{discordId}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="discordUsername"> Discord username </label> <input
+                            id="discordUsername" class="form-control" th:field="*{discordUsername}"
+                            required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordUsername')}" th:errors="*{discordUsername}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Register</button>
+                        <span>Already registered? <a href="/static" th:href="@{/login}">Login here</a></span>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="template :: scripts"></div>
+
+</body>
+</html>
