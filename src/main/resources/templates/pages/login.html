@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Registration and Login App</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-
-</head>
+<head th:replace="template :: header"></head>
 <body>
 
-    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <nav th:replace="template :: navbar"></nav>
 
     <br>
     <br>
 
-    <div class = "container">
+    <div class="container">
         <div class = "row">
             <div class = "col-md-6 col-md-offset-3">
 
                 <h1> User Login Page </h1>
                 <form th:action="@{/login}" method="post">
 
+                    <!-- success registration message -->
+                    <div th:if="${param.successRegistration}">
+                        <div class="alert alert-success">
+                            You've successfully registered to our awesome app!
+                        </div>
+                    </div>
+
                     <!-- error message -->
                     <div th:if="${param.error}">
-                        <div class="alert alert-danger">Invalid username or
-                            password.</div>
+                        <div class="alert alert-danger">Invalid username or password.</div>
                     </div>
 
                     <!-- logout message -->
@@ -55,13 +54,16 @@
                             </div>
                         </div>
                     </div>
+
                 </form>
                 <div class="form-group">
-          <span>New user? <a href="/" th:href="@{/registration/discord}">Register
-            here</a></span>
+                    <span>New user? <a th:href="@{/registration/discord}">Register here</a></span>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 </body>
 </html>

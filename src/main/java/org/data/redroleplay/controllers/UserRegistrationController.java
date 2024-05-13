@@ -40,7 +40,7 @@ public class UserRegistrationController {
     }
 
     @GetMapping("/discord")
-    public String showRegistrationForm(Model model) {
+    public String showDiscordLink(Model model) {
 
         String authorizationUri = discordConfiguration.getAuthorizationUri();
 
@@ -48,7 +48,7 @@ public class UserRegistrationController {
 
         model.addAttribute("ShowDiscordButton", true);
 
-        return "registration";
+        return "pages/registration";
     }
 
     @GetMapping
@@ -57,18 +57,22 @@ public class UserRegistrationController {
         Optional<DiscordUser> data = discordDataExtractorService.getDiscordInfo(accessToken);
 
         data.ifPresentOrElse(discordUser -> {
-            UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
-            userRegistrationDto.setEmail(discordUser.getEmail());
-            userRegistrationDto.setDiscordId(discordUser.getId());
+
+            UserRegistrationDto userRegistrationDto = UserRegistrationDto.builder()
+                    .email(discordUser.getEmail())
+                    .discordId(discordUser.getId())
+                    .discordUsername(discordUser.getUsername())
+                    .discordAvatar(String.format("https://cdn.discordapp.com/avatars/%s/%s", discordUser.getId(), discordUser.getAvatar()))
+                    .build();
+
             model.addAttribute("ShowRegistrationForm", true);
             model.addAttribute("user", userRegistrationDto);
-            String avatarUrl = String.format("https://cdn.discordapp.com/avatars/%s/%s", discordUser.getId(), discordUser.getAvatar());
-            model.addAttribute("AvatarUrl", avatarUrl);
+
         }, () -> {
             model.addAttribute("ShowFailingMessage", true);
         });
 
-        return "registration";
+        return "pages/registration";
     }
 
     @PostMapping
@@ -78,11 +82,13 @@ public class UserRegistrationController {
             Model model
     ) {
 
+        model.addAttribute("ShowRegistrationForm", true);
+
         if(result.hasErrors()) {
-            return "registration";
+            return "pages/registration";
         }
 
         userService.save(registrationDto);
-        return "redirect:/registration?success";
+        return "redirect:/login?successRegistration";
     }
 }

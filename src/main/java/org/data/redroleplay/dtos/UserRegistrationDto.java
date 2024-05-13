@@ -40,6 +40,15 @@ public class UserRegistrationDto {
     @Pattern(regexp = "^[0-9]{18}$", message = "Discord ID must contain exactly 18 digits")
     private String discordId;
 
+    @NotNull(message = "Discord username is required")
+    @NotBlank(message = "Field can not be blank")
+    @Pattern(regexp = "^[a-zA-Z0-9_]+$", message =  "Discord Username must contain only letters and digits and underscore")
+    private String discordUsername;
+
+    @NotNull(message ="Discord Avatar is required")
+    @NotBlank(message = "Field can not be blank")
+    private String discordAvatar;
+
     @NotNull(message = "Birth date is required")
     @Past(message = "Birth date must be in the past")
     private LocalDate birthDate;

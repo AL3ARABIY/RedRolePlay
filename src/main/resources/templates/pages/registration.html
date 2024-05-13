@@ -1,16 +1,14 @@
+
+
+
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Registration</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head th:replace="template :: header"></head>
 <body>
 
-    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <nav th:replace="template :: navbar"></nav>
 
     <br>
     <br>
@@ -18,12 +16,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-
-                <!-- success message -->
-                <div th:if="${param.success}">
-                    <div class="alert alert-info">You've successfully registered
-                        to our awesome app!</div>
-                </div>
 
                 <h1>Registration</h1>
 
@@ -35,9 +27,16 @@
                     Failed to get data from Discord
                 </p>
 
-                <img th:if="${ShowRegistrationForm == true}" th:src="${AvatarUrl}" class="img-fluid rounded-circle" alt="Circular Image">
-
                 <form th:if="${ShowRegistrationForm == true}" th:action="@{/registration}" method="post" th:object="${user}">
+
+                    <div class="form-group">
+                        <label class="control-label" for="discordAvatar"> Discord Avatar </label>
+                        <img th:src="${user.discordAvatar}" class="img-fluid rounded-circle" alt="Circular Image" height="25" width="25">
+                        <input id="discordAvatar" class="form-control" th:field="*{discordAvatar}"
+                               required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordAvatar')}" th:errors="*{discordAvatar}"></div>
+                    </div>
+
                     <div class="form-group">
                         <label class="control-label" for="firstName"> First Name </label>
                         <input id="firstName" class="form-control" th:field="*{firstName}"
@@ -60,13 +59,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="discordId"> Discord Id </label> <input
-                            id="discordId" class="form-control" type="number" th:field="*{discordId}"
-                            required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordId')}" th:errors="*{discordId}"></div>
-                    </div>
-
-                    <div class="form-group">
                         <label class="control-label" for="mtaSerial"> Mta Serial </label> <input
                             id="mtaSerial" class="form-control" th:field="*{mtaSerial}"
                             required autofocus="autofocus" />
@@ -81,6 +73,13 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label" for="password"> Password </label>
+                        <input id="password" class="form-control" type="password" name="password"
+                            th:field="*{password}" required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="control-label" for="email"> Email </label> <input
                             id="email" class="form-control" th:field="*{email}" required
                             autofocus="autofocus" />
@@ -88,20 +87,29 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="password"> Password </label> <input
-                            id="password" class="form-control" type="password"
-                            th:field="*{password}" required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        <label class="control-label" for="discordId"> Discord Id </label> <input
+                            id="discordId" class="form-control" type="number" th:field="*{discordId}"
+                            required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordId')}" th:errors="*{discordId}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="discordUsername"> Discord username </label> <input
+                            id="discordUsername" class="form-control" th:field="*{discordUsername}"
+                            required autofocus="autofocus" />
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordUsername')}" th:errors="*{discordUsername}"></div>
                     </div>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">Register</button>
-                        <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+                        <span>Already registered? <a href="/static" th:href="@{/login}">Login here</a></span>
                     </div>
+
                 </form>
 
             </div>
         </div>
     </div>
+
 </body>
 </html>

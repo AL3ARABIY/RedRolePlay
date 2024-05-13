@@ -2,6 +2,7 @@ package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.UserRegistrationDto;
+import org.data.redroleplay.entities.game.Account;
 import org.data.redroleplay.entities.website.Role;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.repositories.website.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,20 +41,23 @@ public class UserServiceImpl implements UserService {
                         .mtaUsername(registrationDto.getMtaUsername())
                         .mtaSerial(registrationDto.getMtaSerial())
                         .discordId(registrationDto.getDiscordId())
+                        .discordUsername(registrationDto.getDiscordUsername())
+                        .discordAvatar(registrationDto.getDiscordAvatar())
                         .firstName(registrationDto.getFirstName())
                         .lastName(registrationDto.getLastName())
                         .birthDate(registrationDto.getBirthDate())
                         .password(new BCryptPasswordEncoder().encode(registrationDto.getPassword()))
                         .mtaPassword(hashedPassword)
+                        .registerDate(LocalDateTime.now())
                         .salt(salt)
                         .roles(List.of(new Role("USER")))
                 .build();
 
-        User savedUser = userRepository.save(user);
+        Account savedAccount = accountService.save(user);
 
-        accountService.save(savedUser);
+        user.setAccountId(savedAccount.getId());
 
-        return savedUser;
+        return userRepository.save(user);
     }
 
     @Override
@@ -84,4 +89,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsByMtaSerial(mtaSerial);
     }
 
+    @Override
+    public Boolean existsByDiscordUsername(String discordUsername){
+        return  userRepository.existsByDiscordUsername(discordUsername);
+    }
 }

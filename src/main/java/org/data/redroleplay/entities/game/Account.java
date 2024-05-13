@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @Builder
@@ -27,7 +29,13 @@ public class Account {
     @Column(name = "discord_id")
     private String discordId;
 
+    @Column(name = "discord_username")
+    private String discordUsername;
+
     private String salt;
 
     private String password;
+
+    @Column(name = "registerdate")
+    private LocalDateTime registerDate;
 }

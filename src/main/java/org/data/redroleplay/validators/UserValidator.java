@@ -38,5 +38,9 @@ public class UserValidator implements Validator {
         if (userService.existsByMtaSerial(user.getMtaSerial())) {
             errors.rejectValue("mtaSerial", "Duplicate.user.mtaSerial");
         }
+
+        if(userService.existsByDiscordUsername(user.getDiscordUsername())){
+            errors.rejectValue("discordUsername", "Duplicate.user.discordUsername");
+        }
     }
 }

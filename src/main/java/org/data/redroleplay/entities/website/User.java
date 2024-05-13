@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -38,9 +39,19 @@ public class User {
     @Column(unique = true)
     private String discordId;
 
+    @Column(unique = true)
+    private String discordUsername;
+
+    private String discordAvatar;
+
     private String salt;
 
     private String mtaPassword;
+
+    @Column(unique = true)
+    private Long accountId;
+
+    private LocalDateTime registerDate;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(

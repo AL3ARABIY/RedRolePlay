@@ -19,4 +19,6 @@ public interface UserService{
     Boolean existsByDiscordId(String discordId);
 
     Boolean existsByMtaSerial(String mtaSerial);
+
+    Boolean existsByDiscordUsername(String discordUsername);
 }
