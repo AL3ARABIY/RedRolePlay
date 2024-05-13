@@ -24,25 +24,27 @@ public class SecurityConfig  {
                 .authorizeHttpRequests(
                         request -> request
                                 .requestMatchers(
-                                        "/",
                                         "/login",
-                                        "/logout",
                                         "/registration**",
-                                        "/registration/discord",
-                                        "/images/**"
+                                        "/registration/discord"
                                 ).permitAll()
+                                .requestMatchers(
+                                        "/",
+                                        "/home",
+                                        "/logout"
+                                ).authenticated()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(login -> login.loginPage("/login"))
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
+                )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
-                        .addLogoutHandler((request, response, authentication) -> {
-                            request.getSession().invalidate();
-                        })
                 )
                 .build();
     }
