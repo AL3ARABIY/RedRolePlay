@@ -8,108 +8,175 @@
 <head th:replace="template :: header"></head>
 <body>
 
-    <nav th:replace="template :: navbar"></nav>
+    <div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
 
-    <br>
-    <br>
+        <!-- Discord Button-->
+        <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+           th:if="${ShowDiscordButton == true}"
+           th:href="${authorizationUri}"
+           type="button">
+            <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            Login with Discord
+        </a>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
 
-                <h1>Registration</h1>
+        <p th:if="${ ShowFailingMessage == true}">
+            Failed to get data from Discord
+        </p>
 
-                <a th:if="${ShowDiscordButton == true}" th:href="${authorizationUri}" type="button">
-                    Login with Discord
-                </a>
+        <!-- Card -->
+        <div th:if="${ShowRegistrationForm == true}" class="max-h-96 overflow-y-auto w-3/4 p-6 space-y-6 sm:p-8 rounded-lg shadow bg-gray-800">
+            <h2 class="text-2xl font-bold text-white ">
+                Create a Free Account
+            </h2>
 
-                <p th:if="${ ShowFailingMessage == true}">
-                    Failed to get data from Discord
-                </p>
-
-                <form th:if="${ShowRegistrationForm == true}" th:action="@{/registration}" method="post" th:object="${user}">
-
-                    <div class="form-group">
-                        <label class="control-label" for="discordAvatar"> Discord Avatar </label>
-                        <img th:src="${user.discordAvatar}" class="img-fluid rounded-circle" alt="Circular Image" height="25" width="25">
-                        <input id="discordAvatar" class="form-control" th:field="*{discordAvatar}"
-                               required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordAvatar')}" th:errors="*{discordAvatar}"></div>
+            <form  th:action="@{/registration}" method="post" th:object="${user}">
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label for="firstName"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            First name <span class="font-small text-gray-200">(Real)</span>
+                        </label>
+                        <input th:field="*{firstName}"
+                               type="text"
+                               id="firstName"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="First Name"
+                               required />
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                           th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="firstName"> First Name </label>
-                        <input id="firstName" class="form-control" th:field="*{firstName}"
-                               required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                    <div>
+                        <label for="lastName"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Last name <span class="font-small text-gray-200">(Real)</span>
+                        </label>
+                        <input th:field="*{lastName}"
+                               type="text"
+                               id="lastName"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Last Name"
+                               required />
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                           th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="lastName"> Last Name </label> <input
-                            id="lastName" class="form-control" th:field="*{lastName}"
-                            required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                    <div>
+                        <label for="mtaUsername"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Mta Username
+                        </label>
+                        <input th:field="*{mtaUsername}"
+                               type="text"
+                               id="mtaUsername"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Last Name"
+                               required />
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                           th:if="${#fields.hasErrors('mtaUsername')}" th:errors="*{mtaUsername}"></p>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="username"> Mta Username </label> <input
-                            id="username" class="form-control" th:field="*{mtaUsername}"
-                            required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('mtaUsername')}" th:errors="*{mtaUsername}"></div>
+                    <div>
+                        <label for="mtaSerial"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Mta Username
+                        </label>
+                        <input th:field="*{mtaSerial}"
+                               type="text"
+                               id="mtaSerial"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Your Mta Serial (Open MTA, press F8 and type serial)"
+                               required />
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                           th:if="${#fields.hasErrors('mtaSerial')}" th:errors="*{mtaSerial}"></p>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="mtaSerial"> Mta Serial </label> <input
-                            id="mtaSerial" class="form-control" th:field="*{mtaSerial}"
-                            required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('mtaSerial')}" th:errors="*{mtaSerial}"></div>
+                    <div>
+                        <label for="discordUsername"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Discord Username
+                        </label>
+                        <input th:field="*{discordUsername}"
+                               type="text"
+                               id="discordUsername"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Your Mta Serial (Open MTA, press F8 and type serial)"
+                               disabled
+                               required />
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                           th:if="${#fields.hasErrors('discordUsername')}" th:errors="*{discordUsername}"></p>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="birthDate"> BirthDate </label> <input
-                            id="birthDate" class="form-control" type="date" th:field="*{birthDate}"
-                            required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+                    <div>
+                        <label for="discordId"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Discord Id
+                        </label>
+                        <input th:field="*{discordId}"
+                               type="text"
+                               id="discordId"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Your Mta Serial (Open MTA, press F8 and type serial)"
+                               disabled
+                               required />
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                           th:if="${#fields.hasErrors('discordId')}" th:errors="*{discordId}"></p>
                     </div>
+                </div>
+                <div class="mb-6">
+                    <label for="birthDate"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Birth Date <span class="font-small text-gray-200">(Real)</span>
+                    </label>
+                    <input th:field="*{birthDate}"
+                           type="date"
+                           id="birthDate"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           required />
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                       th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></p>
+                </div>
+                <div class="mb-6">
+                    <label for="email"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Email address
+                    </label>
+                    <input th:field="*{email}"
+                           type="email"
+                           id="email"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           disabled
+                           required />
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                       th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                </div>
+                <div class="mb-6">
+                    <label for="password"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Password
+                    </label>
+                    <input th:field="*{password}"
+                           type="password"
+                           id="password"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           required />
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                       th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                </div>
+                <div class="flex items-start mb-6">
+                    <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Already registered?
+                        <a href="/static" th:href="@{/login}"
+                           class="text-blue-600 hover:underline dark:text-blue-500">
+                            Login here
+                        </a>.
+                    </label>
+                </div>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register</button>
+            </form>
 
-                    <div class="form-group">
-                        <label class="control-label" for="password"> Password </label>
-                        <input id="password" class="form-control" type="password" name="password"
-                            th:field="*{password}" required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="email"> Email </label> <input
-                            id="email" class="form-control" th:field="*{email}" required
-                            autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="discordId"> Discord Id </label> <input
-                            id="discordId" class="form-control" type="number" th:field="*{discordId}"
-                            required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordId')}" th:errors="*{discordId}"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="discordUsername"> Discord username </label> <input
-                            id="discordUsername" class="form-control" th:field="*{discordUsername}"
-                            required autofocus="autofocus" />
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('discordUsername')}" th:errors="*{discordUsername}"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Register</button>
-                        <span>Already registered? <a href="/static" th:href="@{/login}">Login here</a></span>
-                    </div>
-
-                </form>
-
-            </div>
         </div>
     </div>
+
+    <div th:replace="template :: scripts"></div>
 
 </body>
 </html>
