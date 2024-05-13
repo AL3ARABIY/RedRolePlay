@@ -29,6 +29,8 @@ public class UserRegistrationController {
 
     private final DiscordDataExtractorService discordDataExtractorService;
 
+    private UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(userValidator);
@@ -36,7 +38,7 @@ public class UserRegistrationController {
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
-        return new UserRegistrationDto();
+        return userRegistrationDto;
     }
 
     @GetMapping("/discord")
@@ -58,7 +60,7 @@ public class UserRegistrationController {
 
         data.ifPresentOrElse(discordUser -> {
 
-            UserRegistrationDto userRegistrationDto = UserRegistrationDto.builder()
+            userRegistrationDto = UserRegistrationDto.builder()
                     .email(discordUser.getEmail())
                     .discordId(discordUser.getId())
                     .discordUsername(discordUser.getUsername())
@@ -82,9 +84,8 @@ public class UserRegistrationController {
             Model model
     ) {
 
-        model.addAttribute("ShowRegistrationForm", true);
-
         if(result.hasErrors()) {
+            model.addAttribute("ShowRegistrationForm", true);
             return "pages/registration";
         }
 
