@@ -37,7 +37,6 @@ public class UserRegistrationDto {
 
     @NotNull(message = "Discord ID is required")
     @NotBlank(message = "Field can not be blank")
-    @Pattern(regexp = "^[0-9]{18}$", message = "Discord ID must contain exactly 18 digits")
     private String discordId;
 
     @NotNull(message = "Discord username is required")
