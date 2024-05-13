@@ -23,7 +23,14 @@ public class SecurityConfig  {
         return http
                 .authorizeHttpRequests(
                         request -> request
-                                .requestMatchers("/","/login","/logout", "/registration**","/registration/discord").permitAll()
+                                .requestMatchers(
+                                        "/",
+                                        "/login",
+                                        "/logout",
+                                        "/registration**",
+                                        "/registration/discord",
+                                        "/images/**"
+                                ).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login -> login.loginPage("/login"))
