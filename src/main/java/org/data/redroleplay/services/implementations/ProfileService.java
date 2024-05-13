@@ -3,7 +3,6 @@ package org.data.redroleplay.services.implementations;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.models.UserProfile;
-import org.data.redroleplay.services.ProfileService;
 import org.data.redroleplay.services.UserService;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.Authentication;
@@ -14,11 +13,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ProfileServiceImpl implements ProfileService {
+public class ProfileService {
 
     private final UserService userService;
 
-    @Override
     @Cacheable("profileCache")
     public UserProfile getUserProfile() {
 
@@ -33,7 +31,7 @@ public class ProfileServiceImpl implements ProfileService {
                         .email(user.getEmail())
                         .mtaUsername(user.getMtaUsername())
                         .build())
-                .orElse(getDefaultUserProfile();
+                .orElse(getDefaultUserProfile());
 
     }
 
