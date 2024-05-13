@@ -91,7 +91,7 @@
                     <div>
                         <label for="mtaSerial"
                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Mta Username
+                            Mta Serial
                         </label>
                         <input th:field="*{mtaSerial}"
                                type="text"
@@ -102,37 +102,31 @@
                         <p class="mt-2 text-sm text-red-600 dark:text-red-500"
                            th:if="${#fields.hasErrors('mtaSerial')}" th:errors="*{mtaSerial}"></p>
                     </div>
-                    <div>
-                        <label for="discordUsername"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <div class="relative">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Discord Username
                         </label>
-                        <input th:field="*{discordUsername}"
-                               type="text"
-                               name="discordUsername"
-                               id="discordUsername"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="Your Mta Serial (Open MTA, press F8 and type serial)"
-                               disabled
-                               required />
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                           th:if="${#fields.hasErrors('discordUsername')}" th:errors="*{discordUsername}"></p>
+                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <span class="inline-block w-full"
+                                  id="discordUsername"
+                                  th:text="*{discordUsername}"
+                            >
+                            </span>
+                        </div>
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500" th:if="${#fields.hasErrors('discordUsername')}" th:errors="*{discordUsername}"></p>
                     </div>
-                    <div>
-                        <label for="discordId"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <div class="relative">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Discord Id
                         </label>
-                        <input th:field="*{discordId}"
-                               type="text"
-                               id="discordId"
-                               name="discordId"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="Your Mta Serial (Open MTA, press F8 and type serial)"
-                               disabled
-                               required />
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                           th:if="${#fields.hasErrors('discordId')}" th:errors="*{discordId}"></p>
+                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <span class="inline-block w-full"
+                                  id="discordId"
+                                  th:text="*{discordId}"
+                            >
+                            </span>
+                        </div>
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500" th:if="${#fields.hasErrors('discordId')}" th:errors="*{discordId}"></p>
                     </div>
                 </div>
                 <div class="mb-6">
@@ -148,21 +142,19 @@
                     <p class="mt-2 text-sm text-red-600 dark:text-red-500"
                        th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></p>
                 </div>
-                <div class="mb-6">
-                    <label for="email"
-                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <div class="mb-6 relative">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Email address
                     </label>
-                    <input th:field="*{email}"
-                           type="email"
-                           id="email"
-                           name="email"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           disabled
-                           required />
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                       th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <span class="inline-block w-full"
+                              id="email"
+                              th:text="*{email}">
+                        </span>
+                    </div>
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                 </div>
+
                 <div class="mb-6">
                     <label for="password"
                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
