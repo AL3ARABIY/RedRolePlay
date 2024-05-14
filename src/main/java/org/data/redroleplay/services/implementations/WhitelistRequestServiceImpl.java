@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.VerifyWhitelistRequestDto;
 import org.data.redroleplay.dtos.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
-import org.data.redroleplay.enums.CharacterGender;
-import org.data.redroleplay.enums.CharacterOrientation;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
+import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
 import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
+import org.data.redroleplay.errorHandling.costums.UserNeedAuthorisation;
 import org.data.redroleplay.repositories.website.WhitelistRequestRepository;
 
 import org.data.redroleplay.services.AuthenticationService;
@@ -47,6 +47,12 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
 
     @Override
     public WhitelistRequest verify(VerifyWhitelistRequestDto verifyWhitelistRequestDto) {
-        return null;
+
+        WhitelistRequest fetchedWhitelistRequest = whitelistRequestRepository.findById(verifyWhitelistRequestDto.getId())
+                .orElseThrow(() -> new RecordNotFoundException("Whitelist request not found"));
+
+        modelMapper.map(verifyWhitelistRequestDto, fetchedWhitelistRequest);
+
+        return whitelistRequestRepository.save(fetchedWhitelistRequest);
     }
 }

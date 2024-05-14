@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface AuthenticationService {
 
     Optional<User> getAuthenticatedUser();
+
+    boolean isUserHasRole(String role);
 }
