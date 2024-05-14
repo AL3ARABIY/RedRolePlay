@@ -38,11 +38,6 @@ public class SecurityConfig  {
                                         "/registration/discord",
                                         "/images/**"
                                 ).permitAll()
-                                .requestMatchers(
-                                        "/",
-                                        "/home",
-                                        "/logout"
-                                ).authenticated()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
