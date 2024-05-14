@@ -1,6 +1,7 @@
 package org.data.redroleplay.configurations;
 
 import lombok.RequiredArgsConstructor;
+import org.data.redroleplay.filters.LoginPageFilter;
 import org.data.redroleplay.services.implementations.SecurityUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -20,13 +22,18 @@ public class SecurityConfig  {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http.addFilterBefore(
+                new LoginPageFilter(), DefaultLoginPageGeneratingFilter.class);
+
         return http
                 .authorizeHttpRequests(
                         request -> request
                                 .requestMatchers(
                                         "/login",
                                         "/registration**",
-                                        "/registration/discord"
+                                        "/registration/discord",
+                                        "/images/**"
                                 ).permitAll()
                                 .requestMatchers(
                                         "/",

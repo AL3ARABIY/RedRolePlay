@@ -19,3 +19,6 @@
 
 ### Max Http header size
 - Article: https://www.baeldung.com/spring-boot-max-http-header-size
+
+### Prevent Authenticated Users From Accessing Login Page
+- Article: https://twin.sh/articles/21/spring-security-prevent-authenticated-users-from-accessing-login-page
