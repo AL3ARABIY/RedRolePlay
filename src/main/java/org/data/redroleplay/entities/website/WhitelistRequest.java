@@ -9,6 +9,7 @@ import org.data.redroleplay.enums.CharacterGender;
 import org.data.redroleplay.enums.CharacterOrientation;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -34,7 +35,7 @@ public class WhitelistRequest {
 
     private String characterOrigin;
 
-    private String characterBirthDate;
+    private LocalDate characterBirthDate;
 
     private CharacterOrientation characterOrientation;
 
