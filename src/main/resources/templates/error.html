@@ -10,8 +10,14 @@
     <nav th:replace="template :: navbar"></nav>
 
     <div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900 text-white">
-        <h1>Well Thi is not supposed to happen</h1>
-        <p>Sorry, but something went wrong. Please try again later.</p>
+        <h1>Well This isn't supposed to happen</h1>
+        <p>Sorry, but something went wrong. If this error keep appearing.</p>
+        <p>Please contact the administrator in our
+            <a class="text-red-600 font-bold"
+               href="https://discord.gg/red-roleplay"
+               target="_blank" rel="noopener noreferrer"
+            >Discord</a>
+        </p>
         <p class="font-bold">Error : <span th:text="${error}"></span></p>
         <a class="text-red-600" th:href="@{/home}">Go Home...</a>
     </div>
