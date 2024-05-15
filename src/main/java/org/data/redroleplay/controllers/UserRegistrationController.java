@@ -20,7 +20,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/registration")
 @RequiredArgsConstructor
-@Scope("request")
+@Scope("session")
 public class UserRegistrationController {
 
     private final UserService userService;
