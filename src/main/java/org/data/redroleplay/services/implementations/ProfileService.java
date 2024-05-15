@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Scope("session")
+@Scope("request")
 public class ProfileService {
 
     private final UserService userService;
