@@ -20,31 +20,31 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class WhitelistRequestDto {
 
-    @NotNull(message = "Field.required")
-    @Pattern(regexp = "^[A-Z][a-z]{1,}$", message = "Field.simple")
+    @NotNull(message = "{Field.required}")
+    @Pattern(regexp = "^[A-Z][a-z]{1,}$", message = "{Field.simple}")
     private String characterFirstName;
 
-    @NotNull(message = "Field.required")
-    @Pattern(regexp = "^[A-Z][a-z]{1,}$", message = "Field.simple")
+    @NotNull(message = "{Field.required}")
+    @Pattern(regexp = "^[A-Z][a-z]{1,}$", message = "{Field.simple}")
     private String characterLastName;
 
-    @NotNull(message = "Field.required")
+    @NotNull(message = "{Field.required}")
     @EnumValue(enumClass = CharacterGender.class, message="NotValidEnum.whitelistRequest.characterGender")
     private String characterGender;
 
-    @NotNull(message = "Field.required")
+    @NotNull(message = "{Field.required}")
     @Size(min = 3, max = 20, message = "{Field.size}")
     private String characterOrigin;
 
-    @NotNull(message = "Field.required")
-    @Past(message = "BirthDate.past")
+    @NotNull(message = "{Field.required}")
+    @Past(message = "{BirthDate.past}")
     private LocalDate characterBirthDate;
 
-    @NotNull(message = "Field.required")
-    @EnumValue(enumClass = CharacterOrientation.class, message="NotValidEnum.whitelistRequest.characterOrientation")
+    @NotNull(message = "{Field.required}")
+    @EnumValue(enumClass = CharacterOrientation.class, message="{NotValidEnum.whitelistRequest.characterOrientation}")
     private String characterOrientation;
 
-    @NotNull(message = "Field.required")
+    @NotNull(message = "{Field.required}")
     @Size(min = 100, max = 5000, message = "{Field.size}")
     private String characterStory;
 

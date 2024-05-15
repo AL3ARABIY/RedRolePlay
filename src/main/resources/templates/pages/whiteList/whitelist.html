@@ -47,7 +47,8 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+                    <input type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Search for requests">
                 </div>
 
                 <div class="relative">
@@ -71,10 +72,7 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            Character FirstName
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Character LastName
+                            Character FullName
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
                             Character Gender
@@ -124,15 +122,11 @@
                             0
                         </td>
 
-                        <td th:text="${whitelistRequest.characterFirstName}"
+                        <td th:text="${whitelistRequest.characterFullName}"
                                 class="px-6 py-4 text-center">
                             Default
                         </td>
 
-                        <td th:text="${whitelistRequest.characterLastName}"
-                                class="px-6 py-4 text-center">
-                            User
-                        </td>
 
                         <td th:text="${whitelistRequest.characterGender}"
                                 class="px-6 py-4 text-center">
@@ -149,7 +143,7 @@
                             CIVILIAN
                         </td>
 
-                        <td th:text="${whitelistRequest.requestDate}"
+                        <td th:text="${whitelistRequest.requestDate.getYear() + '/' + whitelistRequest.requestDate.getMonthValue() + '/' + whitelistRequest.requestDate.getDayOfMonth()}"
                                 class="px-6 py-4 text-center">
                             01/01/2021
                         </td>
@@ -176,6 +170,7 @@
 
                 </tbody>
             </table>
+
         </div>
 
 

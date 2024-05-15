@@ -24,9 +24,7 @@ public class WhitelistRequestDisplayForUserDto {
 
     private Long id;
 
-    private String characterFirstName;
-
-    private String characterLastName;
+    private String characterFullName;
 
     private CharacterGender characterGender;
 

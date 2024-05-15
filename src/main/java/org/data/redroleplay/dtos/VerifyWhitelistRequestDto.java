@@ -16,14 +16,14 @@ import org.data.redroleplay.enums.WhitelistRequestStatus;
 @NoArgsConstructor
 public class VerifyWhitelistRequestDto {
 
-    @NotNull(message = "Field.required")
+    @NotNull(message = "{Field.required}")
     private Long id;
 
-    @NotNull(message = "Field.required")
-    @EnumValue(enumClass = WhitelistRequestStatus.class, message = "NotValidEnum.whitelistRequest.status")
+    @NotNull(message = "{Field.required}")
+    @EnumValue(enumClass = WhitelistRequestStatus.class, message = "{NotValidEnum.whitelistRequest.status}")
     private String status;
 
-    @NotNull(message = "Field.required")
+    @NotNull(message = "{Field.required}")
     @Size(min = 10, max = 5000, message = "{Field.size}")
     private String reason;
 
