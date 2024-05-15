@@ -19,9 +19,7 @@ public class ProfileService {
     private final UserService userService;
 
     @Cacheable("profileCache")
-    public UserProfile getUserProfile() {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public UserProfile getUserProfile(Authentication authentication) {
 
         if(authentication == null) return getDefaultUserProfile();
 

@@ -2,7 +2,7 @@ package org.data.redroleplay.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.services.implementations.ProfileService;
-import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -23,7 +23,7 @@ public class MainController {
 
     @GetMapping("/home")
     public String homePage() {
-        profileService.getUserProfile();
+        profileService.getUserProfile(SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/";
     }
 }
