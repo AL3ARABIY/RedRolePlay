@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
-@Scope("request")
 public class MainController {
 
     private final ProfileService profileService;
