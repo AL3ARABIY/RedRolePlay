@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -56,6 +57,11 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
         modelMapper.map(verifyWhitelistRequestDto, fetchedWhitelistRequest);
 
         return whitelistRequestRepository.save(fetchedWhitelistRequest);
+    }
+
+    @Override
+    public Optional<WhitelistRequest> getById(Long id){
+        return whitelistRequestRepository.findById(id);
     }
 
     @Override

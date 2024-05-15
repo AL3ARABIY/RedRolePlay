@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="h-full"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head th:replace="template :: header"></head>
+
+<body class="h-full">
+
+    <nav th:replace="template :: navbar"></nav>
+
+    <div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
+
+        <!-- Card -->
+        <div class="max-h-96 overflow-y-auto w-3/4 p-6 space-y-6 sm:p-8 rounded-lg shadow bg-gray-800">
+            <div class="w-full flex items-center justify-between flex-wrap">
+                <div class="flex items-center">
+                    <div class="mr-2 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
+                        <img th:src="@{/images/RedLogo.png}" alt="Logo" class="w-full h-full rounded-full">
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Details <span class="font-bold text-red-600">R</span>equest</h2>
+                </div>
+
+                <div class="text-white font-bold">
+                    <div th:if="${whitelistRequestDetails.status.getValue() == 'pending'}"
+                         class="flex items-center">
+                        <div class="h-2.5 w-2.5 rounded-full bg-orange-500 me-2"></div> Pending
+                    </div>
+                    <div th:if="${whitelistRequestDetails.status.getValue() == 'accepted'}"
+                         class="flex items-center">
+                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Accepted
+                    </div>
+                    <div th:if="${whitelistRequestDetails.status.getValue() == 'denied'}"
+                         class="flex items-center">
+                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Denied
+                    </div>
+                </div>
+            </div>
+
+            <form  th:action="@{/whitelist/request}" method="post" th:object="${whitelistRequestDetails}">
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label for="characterFullName"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            CharacterFullName
+                        </label>
+                        <input th:field="*{characterFullName}"
+                               type="text"
+                               id="characterFullName"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                               disabled
+                               required />
+                    </div>
+                    <div>
+                        <label for="characterOrigin"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Character Origin
+                        </label>
+                        <input th:field="*{characterOrigin}"
+                               type="text"
+                               id="characterOrigin"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                               disabled
+                               required />
+                    </div>
+                    <div>
+                        <label for="characterBirthDate"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Character BirthDate
+                        </label>
+                        <input th:value="*{characterBirthDate}"
+                               type="date"
+                               id="characterBirthDate"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                               disabled
+                               required />
+                    </div>
+
+                    <div>
+                        <label for="characterGender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Character Gender
+                        </label>
+                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
+                            <span class="flex items-center inline-block w-full" id="characterGender">
+                                <div th:if="${whitelistRequestDetails.characterGender.getValue() == 'female'}"
+                                     class="h-2.5 w-2.5 rounded-full bg-pink-500 me-2"></div>
+                                <div th:if="${whitelistRequestDetails.characterGender.getValue() == 'male'}"
+                                     class="h-2.5 w-2.5 rounded-full bg-blue-500 me-2"></div>
+                                <div>
+                                    <span th:text="*{characterGender}"></span>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="characterOrientation"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Character Orientation
+                        </label>
+                        <input th:field="*{characterOrientation}"
+                               type="text"
+                               id="characterOrientation"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                               disabled
+                               required />
+                    </div>
+                    <div>
+                        <label for="requestDate"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Request Date
+                        </label>
+                        <input th:value="*{requestDate}"
+                               type="datetime-local"
+                               id="requestDate"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                               disabled
+                               required />
+                    </div>
+
+                </div>
+                <div th:if="${whitelistRequestDetails.reason}" class="mb-6">
+                        class="mb-6">
+                    <label for="reason"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Reason
+                    </label>
+                    <textarea th:field="*{reason}"
+                              type="text"
+                              id="reason"
+                              class="bg-gray-50 h-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                              required
+                              disabled>
+                    </textarea>
+                </div>
+                <div th:if="${whitelistRequestDetails.note}"
+                        class="mb-6">
+                    <label for="note"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Note
+                    </label>
+                    <textarea th:field="*{note}"
+                              type="text"
+                              id="note"
+                              class="bg-gray-50 h-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                              required
+                              disabled>
+                    </textarea>
+                </div>
+                <div class="mb-6">
+                    <label for="characterStory"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Character Story
+                    </label>
+                    <textarea th:field="*{characterStory}"
+                           type="text"
+                           id="characterStory"
+                           class="bg-gray-50 h-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                           required
+                           disabled
+                    ></textarea>
+                </div>
+            </form>
+
+        </div>
+        
+    </div>
+
+    <div th:replace="template :: scripts"></div>
+
+</body>
+</html>

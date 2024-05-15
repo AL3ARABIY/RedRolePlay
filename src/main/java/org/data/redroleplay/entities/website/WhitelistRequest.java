@@ -56,8 +56,10 @@ public class WhitelistRequest {
     @ManyToOne
     private User verifiedBy;
 
+    @Column(length = 5000)
     private String reason;
 
+    @Column(length = 5000)
     private String note;
 
 }

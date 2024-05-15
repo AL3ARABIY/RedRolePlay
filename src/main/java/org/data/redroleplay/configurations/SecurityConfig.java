@@ -36,7 +36,9 @@ public class SecurityConfig  {
                                         "/login",
                                         "/registration**",
                                         "/registration/discord",
-                                        "/images/**"
+                                        "/images/**",
+                                        "/css/**",
+                                        "/fonts/**"
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 )

@@ -29,7 +29,7 @@ public class WhitelistRequestDto {
     private String characterLastName;
 
     @NotNull(message = "{Field.required}")
-    @EnumValue(enumClass = CharacterGender.class, message="NotValidEnum.whitelistRequest.characterGender")
+    @EnumValue(enumClass = CharacterGender.class, message="{NotValidEnum.whitelistRequest.characterGender}")
     private String characterGender;
 
     @NotNull(message = "{Field.required}")
