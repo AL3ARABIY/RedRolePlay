@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.data.redroleplay.enums.CharacterGender;
 import org.data.redroleplay.enums.CharacterOrientation;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
+import org.hibernate.annotations.Formula;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,14 +32,19 @@ public class WhitelistRequest {
 
     private String characterLastName;
 
+    @Formula("concat(characterFirstName, '_', characterLastName)")
+    private String characterFullName;
+
     private CharacterGender characterGender;
 
+    @Column(length = 20)
     private String characterOrigin;
 
     private LocalDate characterBirthDate;
 
     private CharacterOrientation characterOrientation;
 
+    @Column(length = 5000)
     private String characterStory;
 
     private LocalDateTime requestDate;

@@ -2,6 +2,7 @@ package org.data.redroleplay.dtos.whiteListRequest;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,9 +21,11 @@ import java.time.LocalDate;
 public class WhitelistRequestDto {
 
     @NotNull(message = "Field.required")
+    @Pattern(regexp = "^[A-Z][a-z]{1,}$", message = "Field.simple")
     private String characterFirstName;
 
     @NotNull(message = "Field.required")
+    @Pattern(regexp = "^[A-Z][a-z]{1,}$", message = "Field.simple")
     private String characterLastName;
 
     @NotNull(message = "Field.required")
@@ -30,6 +33,7 @@ public class WhitelistRequestDto {
     private String characterGender;
 
     @NotNull(message = "Field.required")
+    @Size(min = 3, max = 20, message = "{Field.size}")
     private String characterOrigin;
 
     @NotNull(message = "Field.required")
