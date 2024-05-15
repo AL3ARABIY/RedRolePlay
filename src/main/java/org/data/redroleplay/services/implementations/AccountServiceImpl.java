@@ -19,12 +19,12 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account save(User user) {
 
-        Optional<Account> lastAccount = accountRepository.findFirstByOrderByIdDesc();
-
-        Long id = lastAccount.map(Account::getId).orElse(1L) + 1;
+//        Optional<Account> lastAccount = accountRepository.findFirstByOrderByIdDesc();
+//
+//        Long id = lastAccount.map(Account::getId).orElse(1L) + 1;
 
         Account account = Account.builder()
-                .id(id)
+//                .id(id)
                 .email(user.getEmail())
                 .username(user.getMtaUsername())
                 .password(user.getMtaPassword())
