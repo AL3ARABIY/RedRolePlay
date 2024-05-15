@@ -5,6 +5,7 @@ import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.models.UserProfile;
 import org.data.redroleplay.services.UserService;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Scope("prototype")
 public class ProfileService {
 
     private final UserService userService;
