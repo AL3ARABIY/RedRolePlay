@@ -2,17 +2,19 @@ package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.VerifyWhitelistRequestDto;
-import org.data.redroleplay.dtos.WhitelistRequestDto;
+import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForUserDto;
+import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
 import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
 import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
-import org.data.redroleplay.errorHandling.costums.UserNeedAuthorisation;
+import org.data.redroleplay.models.CustomPageResponse;
 import org.data.redroleplay.repositories.website.WhitelistRequestRepository;
 
 import org.data.redroleplay.services.AuthenticationService;
 import org.data.redroleplay.services.WhitelistRequestService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -54,5 +56,13 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
         modelMapper.map(verifyWhitelistRequestDto, fetchedWhitelistRequest);
 
         return whitelistRequestRepository.save(fetchedWhitelistRequest);
+    }
+
+    @Override
+    public CustomPageResponse<WhitelistRequest , WhitelistRequestDisplayForUserDto> getAllByUserId(Long userId, Integer page, Integer size){
+        return new CustomPageResponse<>(
+                whitelistRequestRepository.findAllByUserId(userId, PageRequest.of(page, size)),
+                WhitelistRequestDisplayForUserDto.class
+        );
     }
 }

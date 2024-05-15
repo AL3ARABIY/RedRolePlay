@@ -22,3 +22,10 @@
 
 ### Prevent Authenticated Users From Accessing Login Page
 - Article: https://twin.sh/articles/21/spring-security-prevent-authenticated-users-from-accessing-login-page
+
+### Exception Handling in Spring Boot and Thymeleaf
+- Article 1: https://www.thymeleaf.org/doc/articles/springsecurity.html
+- Article 2: https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+
+### Thymeleaf List
+- Article: https://www.baeldung.com/thymeleaf-list

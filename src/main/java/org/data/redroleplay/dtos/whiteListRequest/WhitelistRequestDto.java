@@ -1,4 +1,4 @@
-package org.data.redroleplay.dtos;
+package org.data.redroleplay.dtos.whiteListRequest;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
