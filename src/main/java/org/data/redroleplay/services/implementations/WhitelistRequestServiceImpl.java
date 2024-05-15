@@ -71,4 +71,9 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
                 WhitelistRequestDisplayForUserDto.class
         );
     }
+
+    @Override
+    public boolean existsByCharacterFirstNameAndCharacterLastName(String characterFirstName, String characterLastName){
+        return whitelistRequestRepository.existsByCharacterFirstNameAndCharacterLastName(characterFirstName, characterLastName);
+    }
 }

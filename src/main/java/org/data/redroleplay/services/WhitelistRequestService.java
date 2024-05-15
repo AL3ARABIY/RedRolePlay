@@ -18,4 +18,7 @@ public interface WhitelistRequestService {
 
     Optional<WhitelistRequest> getById(Long id);
 
+    boolean existsByCharacterFirstNameAndCharacterLastName(String characterFirstName, String characterLastName);
+
+
 }

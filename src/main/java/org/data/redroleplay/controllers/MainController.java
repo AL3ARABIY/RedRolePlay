@@ -2,11 +2,13 @@ package org.data.redroleplay.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.services.implementations.ProfileService;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
+@Scope("request")
 public class MainController {
 
     private final ProfileService profileService;

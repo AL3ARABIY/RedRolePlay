@@ -12,4 +12,6 @@ public interface WhitelistRequestRepository extends JpaRepository<WhitelistReque
     Page<WhitelistRequest> findAllByUserId(Long userId , Pageable pageable);
 
     Page<WhitelistRequest> findAllByStatus(WhitelistRequestStatus status , Pageable pageable);
+
+    boolean existsByCharacterFirstNameAndCharacterLastName(String characterFirstName, String characterLastName);
 }

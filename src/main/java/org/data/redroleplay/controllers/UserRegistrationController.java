@@ -8,6 +8,7 @@ import org.data.redroleplay.services.DiscordDataExtractorService;
 import org.data.redroleplay.services.UserService;
 import org.data.redroleplay.services.implementations.DiscordDataExtractorServiceImpl.DiscordUser;
 import org.data.redroleplay.validators.UserValidator;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/registration")
 @RequiredArgsConstructor
+@Scope("request")
 public class UserRegistrationController {
 
     private final UserService userService;
