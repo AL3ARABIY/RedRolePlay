@@ -19,11 +19,11 @@ public class ProfileService {
     private final UserService userService;
 
     @Cacheable("profileCache")
-    public UserProfile getUserProfile(Authentication authentication) {
+    public UserProfile getUserProfile(org.springframework.security.core.userdetails.User userDetails) {
 
-        if(authentication == null) return getDefaultUserProfile();
+//        if(authentication == null) return getDefaultUserProfile();
 
-        Optional<User> authenticatedUser = userService.getUserByUsername(authentication.getName());
+        Optional<User> authenticatedUser = userService.getUserByUsername(userDetails.getUsername());
 
         return authenticatedUser.map(user -> UserProfile.builder()
                         .discordAvatarUrl(user.getDiscordAvatar())

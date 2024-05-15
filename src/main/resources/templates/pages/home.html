@@ -12,7 +12,7 @@
     <div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
 
         <p class="font-medium text-white">Welcome to the home page
-            <span class="text-red-600" th:text="${@profileService.getUserProfile().getMtaUsername()}"/>
+            <span class="text-red-600" th:text="${@profileService.getUserProfile(#authentication.principal).getMtaUsername()}"/>
         </p>
 
     </div>

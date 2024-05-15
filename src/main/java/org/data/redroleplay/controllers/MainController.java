@@ -23,7 +23,6 @@ public class MainController {
 
     @GetMapping("/home")
     public String homePage() {
-        profileService.getUserProfile(SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/";
     }
 }
