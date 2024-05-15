@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 
@@ -33,6 +34,7 @@ public class UserRegistrationDto {
     @NotNull(message = "MTA serial is required")
     @NotBlank(message = "Field can not be blank")
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "MTA serial must contain only letters and digits")
+    @Length(min = 32, max = 32, message = "MTA serial must be 32 characters long")
     private String mtaSerial;
 
     @NotNull(message = "Discord ID is required")

@@ -53,7 +53,7 @@ public class User {
 
     private LocalDateTime registerDate;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "users_authorities",
             joinColumns = @JoinColumn(
