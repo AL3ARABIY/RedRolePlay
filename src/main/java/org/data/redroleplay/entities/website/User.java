@@ -55,11 +55,11 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "users_roles",
+            name = "users_authorities",
             joinColumns = @JoinColumn(
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
+                    name = "authority_id", referencedColumnName = "id"))
 
-    private Collection<Role> roles;
+    private Collection<Authority> authorities;
 }

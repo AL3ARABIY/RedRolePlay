@@ -3,8 +3,9 @@ package org.data.redroleplay.services.implementations;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.UserRegistrationDto;
 import org.data.redroleplay.entities.game.Account;
-import org.data.redroleplay.entities.website.Role;
+import org.data.redroleplay.entities.website.Authority;
 import org.data.redroleplay.entities.website.User;
+import org.data.redroleplay.enums.BaseAuthority;
 import org.data.redroleplay.repositories.website.UserRepository;
 import org.data.redroleplay.services.AccountService;
 import org.data.redroleplay.services.PasswordHasher;
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
                         .mtaPassword(hashedPassword)
                         .registerDate(LocalDateTime.now())
                         .salt(salt)
-                        .roles(List.of(new Role("USER")))
+                        .authorities(List.of(new Authority(BaseAuthority.SIMPLE_ACCESS)))
                 .build();
 
         Account savedAccount = accountService.save(user);

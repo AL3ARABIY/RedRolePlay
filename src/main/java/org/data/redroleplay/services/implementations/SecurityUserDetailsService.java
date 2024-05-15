@@ -1,7 +1,7 @@
 package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
-import org.data.redroleplay.entities.website.Role;
+import org.data.redroleplay.entities.website.Authority;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.services.UserService;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,11 +27,11 @@ public class SecurityUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
 
         return new org.springframework.security.core.userdetails.User(
-                user.getMtaUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles())
+                user.getMtaUsername(), user.getPassword(), mapAuthorities(user.getAuthorities())
         );
     }
 
-    private Collection< ? extends GrantedAuthority> mapRolesToAuthorities(Collection <Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).toList();
+    private Collection< ? extends GrantedAuthority> mapAuthorities(Collection <Authority> authorities) {
+        return authorities.stream().map(authority -> new SimpleGrantedAuthority(authority.getName())).toList();
     }
 }
