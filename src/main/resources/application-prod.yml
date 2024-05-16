@@ -19,6 +19,3 @@ discord:
   redirectUri: ${DISCORD_REDIRECT_URI:}
   tokenUri: https://discord.com/api/oauth2/token
 
-server:
-  port: 10000
-  address: 0.0.0.0
