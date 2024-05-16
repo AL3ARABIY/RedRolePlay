@@ -14,7 +14,7 @@
     <name>RedRolePlay</name>
     <description>RedRolePlay</description>
     <properties>
-        <java.version>19</java.version>
+        <java.version>17</java.version>
     </properties>
     <packaging>jar</packaging>
     <dependencies>
