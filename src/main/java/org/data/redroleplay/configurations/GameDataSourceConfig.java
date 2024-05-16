@@ -40,8 +40,7 @@ public class GameDataSourceConfig {
                 .persistenceUnit("game")
                 .properties(
                         Map.of(
-                                "hibernate.hbm2ddl.auto", "none",
-                                "hibernate.dialect", "org.hibernate.dialect.MySQLDialect"
+                                "hibernate.hbm2ddl.auto", "none"
                         )
                 )
                 .build();
