@@ -4,12 +4,10 @@ spring:
       jdbcUrl: ${WEBSITE_DATABASE_URL:}
       username: ${WEBSITE_DATABASE_USERNAME:}
       password: ${WEBSITE_DATABASE_PASSWORD:}
-      driverClassName: com.mysql.cj.jdbc.Driver
     game:
       jdbcUrl: ${GAME_DATABASE_URL:}
       username: ${GAME_DATABASE_USERNAME:}
       password: ${GAME_DATABASE_PASSWORD:}
-      driverClassName: com.mysql.cj.jdbc.Driver
 
 discord:
   client-id: ${DISCORD_CLIENT_ID:}
