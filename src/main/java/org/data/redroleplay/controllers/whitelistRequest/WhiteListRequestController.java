@@ -6,6 +6,7 @@ import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForUser
 import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.entities.website.WhitelistRequest;
+import org.data.redroleplay.enums.WhitelistRequestStatus;
 import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
 import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
 import org.data.redroleplay.errorHandling.costums.UserNeedAuthorisation;
@@ -16,6 +17,7 @@ import org.data.redroleplay.services.WhitelistRequestService;
 import org.data.redroleplay.validators.WhiteListRequestValidator;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,12 +50,16 @@ public class WhiteListRequestController {
     public String showUserWhitelistRequestsPage(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
+            @RequestParam(required = false) WhitelistRequestStatus status,
             Model model) {
 
         User authenticatedUser = authenticationService.getAuthenticatedUser()
                 .orElseThrow(() -> new UserNeedAuthentication("User not authenticated"));
 
-        Page<WhitelistRequest> whitelistRequests = whitelistRequestService.getAllByUserId(authenticatedUser.getId(), page, size);
+        Page<WhitelistRequest> whitelistRequests;
+
+        if(status != null) whitelistRequests = whitelistRequestService.getAllByUserIdAndStatus(authenticatedUser.getId(), status, page, size);
+        else whitelistRequests = whitelistRequestService.getAllByUserId(authenticatedUser.getId(), page, size);
 
         CustomPageResponse<WhitelistRequest, WhitelistRequestDisplayForUserDto> costumePage =
                 new CustomPageResponse<>(whitelistRequests, WhitelistRequestDisplayForUserDto.class);

@@ -11,6 +11,7 @@ import org.data.redroleplay.errorHandling.costums.ValidationException;
 import org.data.redroleplay.repositories.website.WhitelistRequestRepository;
 
 import org.data.redroleplay.services.AuthenticationService;
+import org.data.redroleplay.services.UserService;
 import org.data.redroleplay.services.WhitelistRequestService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,8 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
 
     private final AuthenticationService authenticationService;
     private final ModelMapper modelMapper = new ModelMapper();
+
+    private final UserService userService;
 
     @Override
     public WhitelistRequest save(WhitelistRequestDto requestDto) {
@@ -81,7 +84,28 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
 
     @Override
     public Page<WhitelistRequest> getAllByUserId(Long userId, Integer page, Integer size){
+
+        if(!userService.existsById(userId)) {
+            throw new RecordNotFoundException("User not found");
+        }
+
+
         return whitelistRequestRepository.findAllByUserId(userId, PageRequest.of(page, size));
+    }
+
+    @Override
+    public Page<WhitelistRequest> getAllByUserIdAndStatus(Long userId, WhitelistRequestStatus status, Integer page, Integer size){
+
+        if(!userService.existsById(userId)) {
+            throw new RecordNotFoundException("User not found");
+        }
+
+        return whitelistRequestRepository.findAllByUserIdAndStatus(userId ,status, PageRequest.of(page, size));
+    }
+
+    @Override
+    public Page<WhitelistRequest> getAllByStatus(WhitelistRequestStatus status, Integer page, Integer size){
+        return whitelistRequestRepository.findAllByStatus(status, PageRequest.of(page, size));
     }
 
     @Override

@@ -45,23 +45,27 @@
                     <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a th:href="@{'/whitelist?page=' + ${costumePage.getPageNumber()} + '&status=PENDING'}"
+                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                     Pending
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a th:href="@{'/whitelist?page=' + ${costumePage.getPageNumber()} + '&status=ACCEPTED'}"
+                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                      Accepted
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a th:href="@{'/whitelist?page=' + ${costumePage.getPageNumber()} + '&status=DENIED'}"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                      Denied
                                 </a>
                             </li>
                         </ul>
                         <div class="py-1">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                            <a th:href="@{'/whitelist?page=' + ${costumePage.getPageNumber()}}"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                 All
                             </a>
                         </div>
@@ -202,9 +206,9 @@
 
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
                     Showing
-                    <span th:text="${costumePage.getPageSize()}" class="font-semibold text-gray-900 dark:text-white">1-10</span>
+                    <span th:text="${costumePage.getPageNumber() + 1}" class="font-semibold text-gray-900 dark:text-white">1-10</span>
                     of
-                    <span th:text="${costumePage.getTotalElements()}" class="font-semibold text-gray-900 dark:text-white">1000</span>
+                    <span th:text="${costumePage.getTotalPages()}" class="font-semibold text-gray-900 dark:text-white">1000</span>
                 </span>
 
                 <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">

@@ -3,6 +3,7 @@ package org.data.redroleplay.services;
 import org.data.redroleplay.dtos.whiteListRequest.VerifyWhitelistRequestDto;
 import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
+import org.data.redroleplay.enums.WhitelistRequestStatus;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;
@@ -18,6 +19,10 @@ public interface WhitelistRequestService {
     Page<WhitelistRequest> getAllByUserId(Long userId, Integer page, Integer size);
 
     Optional<WhitelistRequest> getById(Long id);
+
+    Page<WhitelistRequest> getAllByStatus(WhitelistRequestStatus status , Integer page, Integer size);
+
+    Page<WhitelistRequest> getAllByUserIdAndStatus(Long userId , WhitelistRequestStatus status , Integer page, Integer size);
 
     boolean existsByCharacterFirstNameAndCharacterLastName(String characterFirstName, String characterLastName);
 

@@ -94,4 +94,9 @@ public class UserServiceImpl implements UserService {
     public Boolean existsByDiscordUsername(String discordUsername){
         return  userRepository.existsByDiscordUsername(discordUsername);
     }
+
+    @Override
+    public Boolean existsById(Long id){
+        return userRepository.existsById(id);
+    }
 }
