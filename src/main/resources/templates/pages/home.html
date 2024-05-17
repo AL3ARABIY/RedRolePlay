@@ -3,11 +3,11 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-<head th:replace="template :: header"></head>
+<head th:replace="~{template :: header}"></head>
 
 <body class="h-full">
 
-    <nav th:replace="template :: navbar"></nav>
+    <nav th:replace="~{template :: navbar}"></nav>
 
     <div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
 
@@ -17,7 +17,7 @@
 
     </div>
 
-    <div th:replace="template :: scripts"></div>
+    <div th:replace="~{template :: scripts}"></div>
 
 </body>
 </html>

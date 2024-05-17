@@ -38,10 +38,9 @@ public class SecurityConfig  {
                                         "/registration**",
                                         "/registration/discord",
                                         "/images/**",
-                                        "/css/**",
-                                        "/fonts/**",
                                         "/error**"
                                 ).permitAll()
+                                .requestMatchers("/admin/whitelist/**").hasAuthority(BaseAuthority.WHITE_LISTER.name())
                                 .anyRequest().hasAuthority(BaseAuthority.SIMPLE_ACCESS.name())
                 )
                 .formLogin(login -> login
