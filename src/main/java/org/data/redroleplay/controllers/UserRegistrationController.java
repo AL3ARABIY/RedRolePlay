@@ -72,9 +72,7 @@ public class UserRegistrationController {
             model.addAttribute("ShowRegistrationForm", true);
             model.addAttribute("user", userRegistrationDto);
 
-        }, () -> {
-            model.addAttribute("ShowFailingMessage", true);
-        });
+        }, () -> model.addAttribute("ShowFailingMessage", true));
 
         return "pages/registration";
     }
