@@ -7,8 +7,8 @@ spring:
       driverClassName: com.mysql.cj.jdbc.Driver
     game:
       jdbcUrl: ${GAME_DATABASE_URL:}
-      username: ${GAME_DATABASE_USERNAME:}
-      password: ${GAME_DATABASE_PASSWORD:}
+      username: ${GAME_DATABASE_USERNAME:u121_ngn9FXPhIg}
+      password: ${GAME_DATABASE_PASSWORD:M=gMW+JhntbU.umbaC1hsE47}
       driverClassName: com.mysql.cj.jdbc.Driver
 
 discord:
@@ -19,3 +19,7 @@ discord:
   redirectUri: ${DISCORD_REDIRECT_URI:}
   tokenUri: https://discord.com/api/oauth2/token
 
+
+server:
+  port: ${PORT:10000}
+  address: ${ADDRESS:0.0.0.0}

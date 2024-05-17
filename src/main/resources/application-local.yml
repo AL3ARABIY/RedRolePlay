@@ -19,4 +19,7 @@ discord:
   redirectUri: ${DISCORD_REDIRECT_URI:}
   tokenUri: https://discord.com/api/oauth2/token
 
+server:
+  port: ${PORT:8080}
+
 
