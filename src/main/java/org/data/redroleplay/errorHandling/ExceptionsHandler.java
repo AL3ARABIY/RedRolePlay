@@ -1,9 +1,6 @@
 package org.data.redroleplay.errorHandling;
 
-import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
-import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
-import org.data.redroleplay.errorHandling.costums.UserNeedAuthorisation;
-import org.data.redroleplay.errorHandling.costums.ValidationException;
+import org.data.redroleplay.errorHandling.costums.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,7 +25,7 @@ public class ExceptionsHandler {
     }
 
     @ExceptionHandler(UserNeedAuthorisation.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handleUserNeedAuthorisation(Model model , UserNeedAuthorisation ex) {
         model.addAttribute("error", ex.getError());
         return "error";
@@ -40,4 +37,5 @@ public class ExceptionsHandler {
         model.addAttribute("error", ex.getError());
         return "error";
     }
+
 }

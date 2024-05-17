@@ -8,6 +8,7 @@ import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
 import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
+import org.data.redroleplay.errorHandling.costums.UserNeedAuthorisation;
 import org.data.redroleplay.mappers.WhitelistRequestDisplayForUserDtoMapper;
 import org.data.redroleplay.models.CustomPageResponse;
 import org.data.redroleplay.services.AuthenticationService;
@@ -72,6 +73,14 @@ public class WhiteListRequestController {
 
         WhitelistRequest whitelistRequest = whitelistRequestService.getById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Whitelist request not found"));
+
+        User authenticatedUser = authenticationService.getAuthenticatedUser()
+                .orElseThrow(() -> new UserNeedAuthentication("User not authenticated"));
+
+        // Check if the user is the owner of the whitelist request
+        if (!whitelistRequest.getUser().getId().equals(authenticatedUser.getId())) {
+            throw new UserNeedAuthorisation("User not authorised to view this page");
+        }
 
         WhitelistRequestDisplayForUserDto whitelistRequestDisplayForUserDto = mapper.map(whitelistRequest);
 
