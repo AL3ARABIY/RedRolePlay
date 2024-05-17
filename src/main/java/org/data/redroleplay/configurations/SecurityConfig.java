@@ -1,6 +1,7 @@
 package org.data.redroleplay.configurations;
 
 import lombok.RequiredArgsConstructor;
+import org.data.redroleplay.enums.BaseAuthority;
 import org.data.redroleplay.filters.LoginPageFilter;
 import org.data.redroleplay.filters.RegistrationPageFilter;
 import org.data.redroleplay.services.implementations.SecurityUserDetailsService;
@@ -41,7 +42,7 @@ public class SecurityConfig  {
                                         "/fonts/**",
                                         "/error**"
                                 ).permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().hasAuthority(BaseAuthority.SIMPLE_ACCESS.name())
                 )
                 .formLogin(login -> login
                         .loginPage("/login")

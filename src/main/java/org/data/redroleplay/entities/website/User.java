@@ -2,6 +2,7 @@ package org.data.redroleplay.entities.website;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,6 +23,9 @@ public class User {
     private String firstName;
 
     private String lastName;
+
+    @Formula("concat(firstName, ' ', lastName)")
+    private String fullName;
 
     private LocalDate birthDate;
 

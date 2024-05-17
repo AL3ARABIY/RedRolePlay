@@ -5,7 +5,7 @@ package org.data.redroleplay.enums;
 public enum BaseAuthority {
     SIMPLE_ACCESS, // This is the default authority for all users , if you remove this they will not be able to access the website
     ADMIN,
-    WHITELISTER,
+    WHITE_LISTER,
     MANAGER
 
 }

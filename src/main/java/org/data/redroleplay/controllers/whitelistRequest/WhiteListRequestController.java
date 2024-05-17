@@ -1,4 +1,4 @@
-package org.data.redroleplay.controllers;
+package org.data.redroleplay.controllers.whitelistRequest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -8,12 +8,14 @@ import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
 import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
+import org.data.redroleplay.mappers.WhitelistRequestDisplayForUserDtoMapper;
 import org.data.redroleplay.models.CustomPageResponse;
 import org.data.redroleplay.services.AuthenticationService;
 import org.data.redroleplay.services.WhitelistRequestService;
 import org.data.redroleplay.validators.WhiteListRequestValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,7 +35,7 @@ public class WhiteListRequestController {
 
     private final WhiteListRequestValidator whiteListRequestValidator;
 
-    private final ModelMapper modelMapper = new ModelMapper();
+    private final WhitelistRequestDisplayForUserDtoMapper mapper;
 
     @ModelAttribute("whitelistDemand")
     public WhitelistRequestDto whitelistRequestDto() {
@@ -41,21 +43,23 @@ public class WhiteListRequestController {
     }
 
     @GetMapping
-    public String showWhitelistPage(Model model) {
+    public String showUserWhitelistRequestsPage(Model model) {
 
         User authenticatedUser = authenticationService.getAuthenticatedUser()
                 .orElseThrow(() -> new UserNeedAuthentication("User not authenticated"));
 
-        CustomPageResponse<WhitelistRequest, WhitelistRequestDisplayForUserDto> whitelistRequests =
-                whitelistRequestService.getAllByUserId(authenticatedUser.getId(), 0, 5);
+        Page<WhitelistRequest> whitelistRequests = whitelistRequestService.getAllByUserId(authenticatedUser.getId(), 0, 5);
 
-        model.addAttribute("whitelistRequests", whitelistRequests);
+        CustomPageResponse<WhitelistRequest, WhitelistRequestDisplayForUserDto> userWhitelistRequests =
+                new CustomPageResponse<>(whitelistRequests, WhitelistRequestDisplayForUserDto.class);
+
+        model.addAttribute("userWhitelistRequests", userWhitelistRequests);
 
         return "pages/whiteList/whitelist";
     }
 
     @GetMapping("/request")
-    public String showWhitelistRequestPage(Model model) {
+    public String showUserWhitelistRequestPage(Model model) {
 
         model.addAttribute("whitelistRequest", whitelistRequestDto);
 
@@ -63,21 +67,20 @@ public class WhiteListRequestController {
     }
 
     @GetMapping("/request/details/{id}")
-    public String showWhitelistRequestDetailsPage(@PathVariable Long id , Model model) {
+    public String showUserWhitelistRequestDetailsPage(@PathVariable Long id , Model model) {
 
         WhitelistRequest whitelistRequest = whitelistRequestService.getById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Whitelist request not found"));
 
-        WhitelistRequestDisplayForUserDto whitelistRequestDisplayForUserDto =
-                modelMapper.map(whitelistRequest, WhitelistRequestDisplayForUserDto.class);
+        WhitelistRequestDisplayForUserDto whitelistRequestDisplayForUserDto = mapper.map(whitelistRequest);
 
-        model.addAttribute("whitelistRequestDetails", whitelistRequestDisplayForUserDto);
+        model.addAttribute("userWhitelistRequestDetails", whitelistRequestDisplayForUserDto);
 
         return "pages/whiteList/whitelist-request-details";
     }
 
     @PostMapping("/request")
-    public String createWhitelistRequest(
+    public String createUserWhitelistRequest(
             @Valid @ModelAttribute("whitelistDemand") WhitelistRequestDto whitelistRequestDto,
             BindingResult result) {
 

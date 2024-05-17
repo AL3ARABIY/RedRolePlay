@@ -22,22 +22,22 @@
                 </div>
 
                 <div class="text-white font-bold">
-                    <div th:if="${userWhitelistRequestDetails.status.getValue() == 'pending'}"
+                    <div th:if="${whitelistRequestDetails.status.getValue() == 'pending'}"
                          class="flex items-center">
                         <div class="h-2.5 w-2.5 rounded-full bg-orange-500 me-2"></div> Pending
                     </div>
-                    <div th:if="${userWhitelistRequestDetails.status.getValue() == 'accepted'}"
+                    <div th:if="${whitelistRequestDetails.status.getValue() == 'accepted'}"
                          class="flex items-center">
                         <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Accepted
                     </div>
-                    <div th:if="${userWhitelistRequestDetails.status.getValue() == 'denied'}"
+                    <div th:if="${whitelistRequestDetails.status.getValue() == 'denied'}"
                          class="flex items-center">
                         <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Denied
                     </div>
                 </div>
             </div>
 
-            <form  th:action="@{/whitelist/request}" method="post" th:object="${userWhitelistRequestDetails}">
+            <form  th:action="@{/whitelist/request}" method="post" th:object="${whitelistRequestDetails}">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label for="characterFullName"
@@ -82,9 +82,9 @@
                         </label>
                         <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
                             <span class="flex items-center inline-block w-full" id="characterGender">
-                                <div th:if="${userWhitelistRequestDetails.characterGender.getValue() == 'female'}"
+                                <div th:if="${whitelistRequestDetails.characterGender.getValue() == 'female'}"
                                      class="h-2.5 w-2.5 rounded-full bg-pink-500 me-2"></div>
-                                <div th:if="${userWhitelistRequestDetails.characterGender.getValue() == 'male'}"
+                                <div th:if="${whitelistRequestDetails.characterGender.getValue() == 'male'}"
                                      class="h-2.5 w-2.5 rounded-full bg-blue-500 me-2"></div>
                                 <div>
                                     <span th:text="*{characterGender}"></span>
@@ -105,6 +105,7 @@
                                disabled
                                required />
                     </div>
+
                     <div>
                         <label for="requestDate"
                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -118,8 +119,34 @@
                                required />
                     </div>
 
+                    <div>
+                        <label for="userFullName"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            User FullName
+                        </label>
+                        <input th:value="*{userFullName}"
+                               type="text"
+                               id="userFullName"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                               disabled
+                               required />
+                    </div>
+
+                    <div>
+                        <label for="verifiedByFullName"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Verifier FullName
+                        </label>
+                        <input th:value="*{verifiedByFullName != null ? verifiedByFullName : 'N/A'}"
+                               type="text"
+                               id="verifiedByFullName"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                               disabled
+                               required />
+                    </div>
+
                 </div>
-                <div th:if="${userWhitelistRequestDetails.reason}" class="mb-6">
+                <div th:if="${whitelistRequestDetails.reason}" class="mb-6">
                     <label for="reason"
                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Reason
@@ -132,7 +159,7 @@
                               disabled>
                     </textarea>
                 </div>
-                <div th:if="${userWhitelistRequestDetails.note}"
+                <div th:if="${whitelistRequestDetails.note}"
                         class="mb-6">
                     <label for="note"
                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

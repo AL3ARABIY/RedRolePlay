@@ -5,6 +5,7 @@ import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForUser
 import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.models.CustomPageResponse;
+import org.springframework.data.domain.Page;
 
 import java.util.Optional;
 
@@ -14,7 +15,9 @@ public interface WhitelistRequestService {
 
     WhitelistRequest verify(VerifyWhitelistRequestDto verifyWhitelistRequestDto);
 
-    CustomPageResponse<WhitelistRequest , WhitelistRequestDisplayForUserDto> getAllByUserId(Long userId, Integer page, Integer size);
+    Page<WhitelistRequest> getAll(Integer page, Integer size);
+
+    Page<WhitelistRequest> getAllByUserId(Long userId, Integer page, Integer size);
 
     Optional<WhitelistRequest> getById(Long id);
 

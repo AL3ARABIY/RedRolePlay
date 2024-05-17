@@ -2,6 +2,7 @@ package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.VerifyWhitelistRequestDto;
+import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForAdminDto;
 import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForUserDto;
 import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
@@ -14,6 +15,7 @@ import org.data.redroleplay.repositories.website.WhitelistRequestRepository;
 import org.data.redroleplay.services.AuthenticationService;
 import org.data.redroleplay.services.WhitelistRequestService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -65,11 +67,13 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
     }
 
     @Override
-    public CustomPageResponse<WhitelistRequest , WhitelistRequestDisplayForUserDto> getAllByUserId(Long userId, Integer page, Integer size){
-        return new CustomPageResponse<>(
-                whitelistRequestRepository.findAllByUserId(userId, PageRequest.of(page, size)),
-                WhitelistRequestDisplayForUserDto.class
-        );
+    public Page<WhitelistRequest> getAllByUserId(Long userId, Integer page, Integer size){
+        return whitelistRequestRepository.findAllByUserId(userId, PageRequest.of(page, size));
+    }
+
+    @Override
+    public Page<WhitelistRequest> getAll(Integer page, Integer size){
+        return whitelistRequestRepository.findAll(PageRequest.of(page, size));
     }
 
     @Override

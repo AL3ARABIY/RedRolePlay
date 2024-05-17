@@ -17,6 +17,7 @@ public class CustomPageResponse <E,DTO> {
     private int pageNumber;
     private int pageSize;
 
+
     public CustomPageResponse(Page<E> page , Class<DTO> dtoClass) {
         ModelMapper modelMapper = new ModelMapper();
         this.content = page.getContent().stream().map(entity -> modelMapper.map(entity, dtoClass)).toList();
