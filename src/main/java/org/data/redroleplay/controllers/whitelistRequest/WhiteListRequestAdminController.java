@@ -36,9 +36,12 @@ public class WhiteListRequestAdminController {
     }
 
     @GetMapping
-    public String showWhitelistRequestsPage(Model model) {
+    public String showWhitelistRequestsPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
 
-        Page<WhitelistRequest> whitelistRequests = whitelistRequestService.getAll(0, 5);
+        Page<WhitelistRequest> whitelistRequests = whitelistRequestService.getAll(page, size);
 
         CustomPageResponse<WhitelistRequest, WhitelistRequestDisplayForAdminDto> allWhitelistRequests =
                 new CustomPageResponse<>(whitelistRequests, WhitelistRequestDisplayForAdminDto.class , mapper.getModelMapper());

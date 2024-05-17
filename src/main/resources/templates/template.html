@@ -6,7 +6,7 @@
 
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
     <title>RED</title>
 
@@ -83,7 +83,7 @@
                             Whitelist
                         </a>
                     </li>
-                    <li sec:authorize="hasRole('WHITE_LISTER')"
+                    <li sec:authorize="hasAuthority('WHITE_LISTER')"
                         class="p-1 rounded-full transition-colors duration-500 hover:bg-white">
                         <a th:href="@{/admin/whitelist}"
                            class="block py-2 px-3 text-red-600 rounded md:bg-transparent md:p-0" aria-current="page">

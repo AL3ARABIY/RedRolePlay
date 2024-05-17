@@ -45,12 +45,15 @@ public class WhiteListRequestController {
     }
 
     @GetMapping
-    public String showUserWhitelistRequestsPage(Model model) {
+    public String showUserWhitelistRequestsPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
 
         User authenticatedUser = authenticationService.getAuthenticatedUser()
                 .orElseThrow(() -> new UserNeedAuthentication("User not authenticated"));
 
-        Page<WhitelistRequest> whitelistRequests = whitelistRequestService.getAllByUserId(authenticatedUser.getId(), 0, 5);
+        Page<WhitelistRequest> whitelistRequests = whitelistRequestService.getAllByUserId(authenticatedUser.getId(), page, size);
 
         CustomPageResponse<WhitelistRequest, WhitelistRequestDisplayForUserDto> costumePage =
                 new CustomPageResponse<>(whitelistRequests, WhitelistRequestDisplayForUserDto.class);
