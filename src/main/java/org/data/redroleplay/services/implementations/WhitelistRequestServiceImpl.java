@@ -1,15 +1,13 @@
 package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
-import org.data.redroleplay.dtos.VerifyWhitelistRequestDto;
-import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForAdminDto;
-import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForUserDto;
+import org.data.redroleplay.dtos.whiteListRequest.VerifyWhitelistRequestDto;
 import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
 import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
 import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
-import org.data.redroleplay.models.CustomPageResponse;
+import org.data.redroleplay.errorHandling.costums.ValidationException;
 import org.data.redroleplay.repositories.website.WhitelistRequestRepository;
 
 import org.data.redroleplay.services.AuthenticationService;
@@ -51,10 +49,25 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
     }
 
     @Override
-    public WhitelistRequest verify(VerifyWhitelistRequestDto verifyWhitelistRequestDto) {
+    public WhitelistRequest verify(VerifyWhitelistRequestDto verifyWhitelistRequestDto , Long id) {
 
-        WhitelistRequest fetchedWhitelistRequest = whitelistRequestRepository.findById(verifyWhitelistRequestDto.getId())
+        WhitelistRequest fetchedWhitelistRequest = whitelistRequestRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Whitelist request not found"));
+
+        if(fetchedWhitelistRequest.getStatus() != WhitelistRequestStatus.PENDING){
+            throw new ValidationException("Whitelist request already verified");
+        }
+
+        authenticationService.getAuthenticatedUser()
+                .ifPresentOrElse(
+                        fetchedWhitelistRequest::setVerifiedBy
+                        ,
+                        () -> {
+                            throw new UserNeedAuthentication("You need to be authenticated to verify a whitelist request");
+                        }
+                );
+
+        fetchedWhitelistRequest.setVerifiedDate(LocalDateTime.now());
 
         modelMapper.map(verifyWhitelistRequestDto, fetchedWhitelistRequest);
 

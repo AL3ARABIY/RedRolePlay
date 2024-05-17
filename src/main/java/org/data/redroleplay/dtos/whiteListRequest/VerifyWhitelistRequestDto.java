@@ -1,4 +1,4 @@
-package org.data.redroleplay.dtos;
+package org.data.redroleplay.dtos.whiteListRequest;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,10 +15,6 @@ import org.data.redroleplay.enums.WhitelistRequestStatus;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VerifyWhitelistRequestDto {
-
-    @NotNull(message = "{Field.required}")
-    private Long id;
-
     @NotNull(message = "{Field.required}")
     @EnumValue(enumClass = WhitelistRequestStatus.class, message = "{NotValidEnum.whitelistRequest.status}")
     private String status;

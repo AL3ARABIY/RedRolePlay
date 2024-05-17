@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="h-full"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head th:replace="template :: header"></head>
+
+<body class="h-full">
+
+    <nav th:replace="template :: navbar"></nav>
+
+    <div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
+
+        <!-- Card -->
+        <div class="max-h-96 overflow-y-auto w-3/4 p-6 space-y-6 sm:p-8 rounded-lg shadow bg-gray-800">
+            <div class="flex items-center">
+                <div class="mr-2 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
+                    <img th:src="@{/images/RedLogo.png}" alt="Logo" class="w-full h-full rounded-full">
+                </div>
+                <h2 class="text-2xl font-bold text-white">Verify <span class="font-bold text-red-600">Red</span>List </h2>
+            </div>
+
+            <form  th:action="@{'/admin/whitelist/request/verify/' + ${whitelistRequestId} }" method="post" th:object="${verifyWhitelistRequest}">
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label for="status"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Status
+                        </label>
+                        <select class="capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                                name="status"
+                                id="status"
+                                th:field="*{status}">
+                            <option class="capitalize text-gray-900 dark:text-white"
+                                    th:value="${T(org.data.redroleplay.enums.WhitelistRequestStatus).ACCEPTED.name()}"
+                            >Accept</option>
+
+                            <option class="capitalize text-gray-900 dark:text-white"
+                                    th:value="${T(org.data.redroleplay.enums.WhitelistRequestStatus).DENIED.name()}"
+                            >Reject</option>
+                        </select>
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                           th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></p>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="note"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Note <span class="font-small text-red-600">(Not Required)</span>
+                    </label>
+                    <textarea th:field="*{note}" rows="2"
+                              type="text"
+                              name="note"
+                              id="note"
+                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                    >
+                    </textarea>
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                       th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p>
+                </div>
+                <div class="mb-6">
+                    <label for="reason"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Reason <span class="font-small text-red-600">(Minimum 10 characters)</span>
+                    </label>
+                    <textarea th:field="*{reason}" rows="4"
+                           type="text" name="reason"
+                           id="reason"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                           required
+                    >
+                    </textarea>
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"
+                       th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}"></p>
+                </div>
+                <button type="submit"
+                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    Done
+                </button>
+            </form>
+
+        </div>
+        
+    </div>
+
+    <div th:replace="template :: scripts"></div>
+
+</body>
+</html>

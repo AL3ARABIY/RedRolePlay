@@ -13,13 +13,14 @@ import org.data.redroleplay.models.CustomPageResponse;
 import org.data.redroleplay.services.AuthenticationService;
 import org.data.redroleplay.services.WhitelistRequestService;
 import org.data.redroleplay.validators.WhiteListRequestValidator;
-import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/whitelist")
@@ -50,10 +51,10 @@ public class WhiteListRequestController {
 
         Page<WhitelistRequest> whitelistRequests = whitelistRequestService.getAllByUserId(authenticatedUser.getId(), 0, 5);
 
-        CustomPageResponse<WhitelistRequest, WhitelistRequestDisplayForUserDto> userWhitelistRequests =
+        CustomPageResponse<WhitelistRequest, WhitelistRequestDisplayForUserDto> costumePage =
                 new CustomPageResponse<>(whitelistRequests, WhitelistRequestDisplayForUserDto.class);
 
-        model.addAttribute("userWhitelistRequests", userWhitelistRequests);
+        model.addAttribute("costumePage", costumePage );
 
         return "pages/whiteList/whitelist";
     }
