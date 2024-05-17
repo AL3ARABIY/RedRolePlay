@@ -83,7 +83,8 @@
                             Whitelist
                         </a>
                     </li>
-                    <li class="p-1 rounded-full transition-colors duration-500 hover:bg-white">
+                    <li sec:authorize="hasRole('WHITE_LISTER')"
+                        class="p-1 rounded-full transition-colors duration-500 hover:bg-white">
                         <a th:href="@{/admin/whitelist}"
                            class="block py-2 px-3 text-red-600 rounded md:bg-transparent md:p-0" aria-current="page">
                             A-Whitelist
