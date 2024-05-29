@@ -52,6 +52,8 @@ public class WhiteListRequestAdminController {
 
         model.addAttribute("allWhitelistRequests", allWhitelistRequests);
 
+        if(status != null) model.addAttribute("status", status.toString());
+
         return "pages/whiteList/admin/whitelist";
     }
 

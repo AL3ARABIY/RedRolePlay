@@ -66,6 +66,8 @@ public class WhiteListRequestController {
 
         model.addAttribute("costumePage", costumePage );
 
+        if(status != null) model.addAttribute("status", status);
+
         return "pages/whiteList/whitelist";
     }
 
