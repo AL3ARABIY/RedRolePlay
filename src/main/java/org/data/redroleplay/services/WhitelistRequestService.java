@@ -26,5 +26,5 @@ public interface WhitelistRequestService {
 
     boolean existsByCharacterFirstNameAndCharacterLastName(String characterFirstName, String characterLastName);
 
-
+    boolean canAuthenticatedUserCreateRequest();
 }

@@ -18,4 +18,7 @@ public interface WhitelistRequestRepository extends JpaRepository<WhitelistReque
     Page<WhitelistRequest> findAllByUserIdAndStatus(Long userId , WhitelistRequestStatus status , Pageable pageable);
 
     boolean existsByCharacterFirstNameAndCharacterLastName(String characterFirstName, String characterLastName);
+
+    @Query("SELECT COUNT(wr) FROM WhitelistRequest wr WHERE wr.user.id = :userId")
+    Long countByUserId(Long userId);
 }

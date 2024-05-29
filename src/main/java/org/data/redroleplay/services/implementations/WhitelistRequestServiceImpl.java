@@ -48,6 +48,10 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
                         }
                 );
 
+        if(whitelistRequestRepository.countByUserId(whitelistRequest.getUser().getId()) >= 5){
+            throw new ValidationException("You can't have more than 5 whitelist requests");
+        }
+
         return whitelistRequestRepository.save(whitelistRequest);
     }
 
@@ -84,22 +88,13 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
 
     @Override
     public Page<WhitelistRequest> getAllByUserId(Long userId, Integer page, Integer size){
-
-        if(!userService.existsById(userId)) {
-            throw new RecordNotFoundException("User not found");
-        }
-
-
+        if(!userService.existsById(userId)) throw new RecordNotFoundException("User not found");
         return whitelistRequestRepository.findAllByUserId(userId, PageRequest.of(page, size));
     }
 
     @Override
     public Page<WhitelistRequest> getAllByUserIdAndStatus(Long userId, WhitelistRequestStatus status, Integer page, Integer size){
-
-        if(!userService.existsById(userId)) {
-            throw new RecordNotFoundException("User not found");
-        }
-
+        if(!userService.existsById(userId)) throw new RecordNotFoundException("User not found");
         return whitelistRequestRepository.findAllByUserIdAndStatus(userId ,status, PageRequest.of(page, size));
     }
 
@@ -116,5 +111,12 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
     @Override
     public boolean existsByCharacterFirstNameAndCharacterLastName(String characterFirstName, String characterLastName){
         return whitelistRequestRepository.existsByCharacterFirstNameAndCharacterLastName(characterFirstName, characterLastName);
+    }
+
+    @Override
+    public boolean canAuthenticatedUserCreateRequest(){
+        return authenticationService.getAuthenticatedUser()
+                .map(user -> whitelistRequestRepository.countByUserId(user.getId()) < 5)
+                .orElse(false);
     }
 }

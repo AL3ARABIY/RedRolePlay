@@ -66,6 +66,9 @@ public class WhiteListRequestController {
 
         model.addAttribute("costumePage", costumePage );
 
+        model.addAttribute("canCreateRequest", whitelistRequestService.canAuthenticatedUserCreateRequest());
+
+
         if(status != null) model.addAttribute("status", status);
 
         return "pages/whiteList/whitelist";
@@ -73,6 +76,10 @@ public class WhiteListRequestController {
 
     @GetMapping("/request")
     public String showUserWhitelistRequestPage(Model model) {
+
+        if(!whitelistRequestService.canAuthenticatedUserCreateRequest()){
+            throw new UserNeedAuthorisation("You can't create more than 5 whitelist requests");
+        }
 
         model.addAttribute("whitelistRequest", whitelistRequestDto);
 
@@ -90,7 +97,7 @@ public class WhiteListRequestController {
 
         // Check if the user is the owner of the whitelist request
         if (!whitelistRequest.getUser().getId().equals(authenticatedUser.getId())) {
-            throw new UserNeedAuthorisation("User not authorised to view this page");
+            throw new UserNeedAuthorisation("Ummm, you are not the owner of this whitelist request.");
         }
 
         WhitelistRequestDisplayForUserDto whitelistRequestDisplayForUserDto = mapper.map(whitelistRequest);
