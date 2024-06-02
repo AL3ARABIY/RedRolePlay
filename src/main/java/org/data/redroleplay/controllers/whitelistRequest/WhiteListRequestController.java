@@ -22,8 +22,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/whitelist")
 @RequiredArgsConstructor
@@ -70,7 +68,7 @@ public class WhiteListRequestController {
 
         if(status != null) model.addAttribute("status", status);
 
-        return "pages/whiteList/whitelist";
+        return "pages/whiteList/index";
     }
 
     @GetMapping("/request")

@@ -54,7 +54,7 @@ public class WhiteListRequestAdminController {
 
         if(status != null) model.addAttribute("status", status.toString());
 
-        return "pages/whiteList/admin/whitelist";
+        return "pages/whiteList/admin/index";
     }
 
     @GetMapping("/request/details/{id}")
