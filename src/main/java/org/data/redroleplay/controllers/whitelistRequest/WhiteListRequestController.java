@@ -17,7 +17,6 @@ import org.data.redroleplay.services.WhitelistRequestService;
 import org.data.redroleplay.validators.WhiteListRequestValidator;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
