@@ -79,7 +79,7 @@ public class WhiteListRequestAdminController {
                 .orElseThrow(() -> new RecordNotFoundException("Whitelist request not found"));
 
         if(whitelistRequest.getStatus() != WhitelistRequestStatus.PENDING){
-            throw new ValidationException("Whitelist request already verified");
+            return String.format("redirect:/admin/whitelist/request/details/%d?alreadyVerified", id);
         }
 
         model.addAttribute("verifyWhitelistRequest", verifyWhitelistRequestDto);
