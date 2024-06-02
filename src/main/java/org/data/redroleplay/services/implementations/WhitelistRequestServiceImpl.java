@@ -11,6 +11,7 @@ import org.data.redroleplay.errorHandling.costums.ValidationException;
 import org.data.redroleplay.repositories.website.WhitelistRequestRepository;
 
 import org.data.redroleplay.services.AuthenticationService;
+import org.data.redroleplay.services.CharacterService;
 import org.data.redroleplay.services.UserService;
 import org.data.redroleplay.services.WhitelistRequestService;
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,8 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
     private final WhitelistRequestRepository whitelistRequestRepository;
 
     private final AuthenticationService authenticationService;
+
+    private final CharacterService characterService;
     private final ModelMapper modelMapper = new ModelMapper();
 
     private final UserService userService;
@@ -78,7 +81,13 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
 
         modelMapper.map(verifyWhitelistRequestDto, fetchedWhitelistRequest);
 
-        return whitelistRequestRepository.save(fetchedWhitelistRequest);
+        WhitelistRequest verifiedWhiteListRequest = whitelistRequestRepository.save(fetchedWhitelistRequest);
+
+        if(WhitelistRequestStatus.ACCEPTED.equals(verifiedWhiteListRequest.getStatus())){
+            characterService.create(verifiedWhiteListRequest);
+        }
+
+        return verifiedWhiteListRequest;
     }
 
     @Override
