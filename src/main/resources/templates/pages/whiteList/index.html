@@ -112,13 +112,13 @@
                     Character Gender
                 </th>
                 <th scope="col" class="px-6 py-3 text-center">
+                    Character Origin
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
                     Character BirthDate
                 </th>
                 <th scope="col" class="px-6 py-3 text-center">
                     Character Orientation
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
-                    Request Date
                 </th>
                 <th scope="col" class="px-6 py-3 text-center">
                     Status
@@ -164,17 +164,16 @@
                     Unknown
                 </td>
 
+                <td th:text="${userWhitelistRequest.characterOrigin}" class="px-6 py-4 text-center">
+                    Morocco
+                </td>
+
                 <td th:text="${userWhitelistRequest.characterBirthDate}" class="px-6 py-4 text-center">
                     01/01/2000
                 </td>
 
                 <td th:text="${userWhitelistRequest.characterOrientation}" class="px-6 py-4 text-center">
                     CIVILIAN
-                </td>
-
-                <td th:text="${userWhitelistRequest.requestDate.getYear() + '/' + userWhitelistRequest.requestDate.getMonthValue() + '/' + userWhitelistRequest.requestDate.getDayOfMonth()}"
-                    class="px-6 py-4 text-center">
-                    01/01/2021
                 </td>
 
                 <td class="px-6 py-4 text-center">
