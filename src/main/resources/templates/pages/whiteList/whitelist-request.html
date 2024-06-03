@@ -1,145 +1,75 @@
 <!DOCTYPE html>
-<html class="h-full"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html class="h-full" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head th:replace="~{template :: header}"></head>
 
-<body class="h-full">
+<body class="h-full bg-gray-900">
 
-    <nav th:replace="~{template :: navbar}"></nav>
+<nav th:replace="~{template :: navbar}"></nav>
 
-    <div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
+<div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
 
-        <!-- Card -->
-        <div class="max-h-96 overflow-y-auto w-3/4 p-6 space-y-6 sm:p-8 rounded-lg shadow bg-gray-800">
-            <div class="flex items-center">
-                <div class="mr-2 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
-                    <img th:src="@{/images/RedLogo.png}" alt="Logo" class="w-full h-full rounded-full">
-                </div>
-                <h2 class="text-2xl font-bold text-white">Apply <span class="font-bold text-red-600">Red</span>List </h2>
+    <!-- Card -->
+    <div class="max-h-96 overflow-y-auto w-3/4 p-6 space-y-6 sm:p-8 rounded-lg shadow bg-gray-800">
+        <div class="flex items-center">
+            <div class="mr-2 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
+                <img th:src="@{/images/RedLogo.png}" alt="Logo" class="w-full h-full rounded-full">
             </div>
-
-            <form  th:action="@{/whitelist/request}" method="post" th:object="${whitelistDemand}">
-                <div class="grid gap-6 mb-6 md:grid-cols-2">
-                    <div>
-                        <label for="characterFirstName"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Character FirstName
-                        </label>
-                        <input th:field="*{characterFirstName}"
-                               type="text"
-                               id="characterFirstName"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                               placeholder="Character FirstName"
-                               required />
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                           th:if="${#fields.hasErrors('characterFirstName')}" th:errors="*{characterFirstName}"></p>
-                    </div>
-                    <div>
-                        <label for="characterLastName"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Character LastName
-                        </label>
-                        <input th:field="*{characterLastName}"
-                               type="text"
-                               id="characterLastName"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                               placeholder="Character LastName"
-                               required />
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                           th:if="${#fields.hasErrors('characterLastName')}" th:errors="*{characterLastName}"></p>
-                    </div>
-                    <div>
-                        <label for="characterOrigin"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Character Origin <span class="font-small text-red-600">(Country)</span>
-                        </label>
-                        <input th:field="*{characterOrigin}"
-                               type="text"
-                               id="characterOrigin"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                               placeholder="Example: Turkey, Germany, United States, etc."
-                               required />
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                           th:if="${#fields.hasErrors('characterOrigin')}" th:errors="*{characterOrigin}"></p>
-                    </div>
-                    <div>
-                        <label for="characterBirthDate"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Character BirthDate
-                        </label>
-                        <input th:field="*{characterBirthDate}"
-                               type="date"
-                               id="characterBirthDate"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                               placeholder="Character BirthDate"
-                               required />
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                           th:if="${#fields.hasErrors('characterBirthDate')}" th:errors="*{characterBirthDate}"></p>
-                    </div>
-
-                    <div>
-                        <label for="characterGender"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Character Gender
-                        </label>
-                        <select class="capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                                name="characterGender"
-                                id="characterGender"
-                                th:field="*{characterGender}">
-                            <option class="text-gray-900 dark:text-white capitalize"
-                                    th:each="gender : ${T(org.data.redroleplay.enums.CharacterGender).values()}"
-                                    th:value="${gender}" th:text="${gender.toString().toLowerCase()}"></option>
-                        </select>
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                           th:if="${#fields.hasErrors('characterGender')}" th:errors="*{characterGender}"></p>
-                    </div>
-
-                    <div>
-                        <label for="characterOrientation"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Character Orientation
-                        </label>
-                        <select class="capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                                name="characterOrientation"
-                                id="characterOrientation"
-                                th:field="*{characterOrientation}">
-                            <option class="capitalize text-gray-900 dark:text-white"
-                                    th:each="orientation : ${T(org.data.redroleplay.enums.CharacterOrientation).values()}"
-                                    th:value="${orientation}" th:text="${orientation.toString().toLowerCase()}"></option>
-                        </select>
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                           th:if="${#fields.hasErrors('characterOrientation')}" th:errors="*{characterOrientation}"></p>
-                    </div>
-                </div>
-                <div class="mb-6">
-                    <label for="characterStory"
-                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Character Story <span class="font-small text-red-600">(Minimum 100 characters)</span>
-                    </label>
-                    <textarea th:field="*{characterStory}" rows="8"
-                           type="text"
-                           id="characterStory"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                           required
-                           placeholder="Example: Meet Vinny 'The Viper' Santoro, a notorious gangster whose reputation precedes him wherever he goes. With a face like stone and eyes as cold as ice, Vinny strikes fear into the hearts of even the bravest souls..."
-                    >
-                    </textarea>
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"
-                       th:if="${#fields.hasErrors('characterStory')}" th:errors="*{characterStory}"></p>
-                </div>
-                <button type="submit"
-                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    Apply
-                </button>
-            </form>
-
+            <h2 class="text-2xl font-bold text-white">Apply <span class="font-bold text-red-600">Red</span>List </h2>
         </div>
-        
+
+        <form th:action="@{/whitelist/request}" method="post" th:object="${whitelistDemand}">
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div>
+                    <label for="characterFirstName" class="block mb-2 text-sm font-medium text-white">Character FirstName</label>
+                    <input th:field="*{characterFirstName}" type="text" id="characterFirstName" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5" placeholder="Character FirstName" required />
+                    <p class="mt-2 text-sm text-red-500" th:if="${#fields.hasErrors('characterFirstName')}" th:errors="*{characterFirstName}"></p>
+                </div>
+                <div>
+                    <label for="characterLastName" class="block mb-2 text-sm font-medium text-white">Character LastName</label>
+                    <input th:field="*{characterLastName}" type="text" id="characterLastName" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5" placeholder="Character LastName" required />
+                    <p class="mt-2 text-sm text-red-500" th:if="${#fields.hasErrors('characterLastName')}" th:errors="*{characterLastName}"></p>
+                </div>
+                <div>
+                    <label for="characterOrigin" class="block mb-2 text-sm font-medium text-white">Character Origin <span class="font-small text-red-600">(Country)</span></label>
+                    <input th:field="*{characterOrigin}" type="text" id="characterOrigin" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5" placeholder="Example: Turkey, Germany, United States, etc." required />
+                    <p class="mt-2 text-sm text-red-500" th:if="${#fields.hasErrors('characterOrigin')}" th:errors="*{characterOrigin}"></p>
+                </div>
+                <div>
+                    <label for="characterBirthDate" class="block mb-2 text-sm font-medium text-white">Character BirthDate</label>
+                    <input th:field="*{characterBirthDate}" type="date" id="characterBirthDate" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5" placeholder="Character BirthDate" required />
+                    <p class="mt-2 text-sm text-red-500" th:if="${#fields.hasErrors('characterBirthDate')}" th:errors="*{characterBirthDate}"></p>
+                </div>
+
+                <div>
+                    <label for="characterGender" class="block mb-2 text-sm font-medium text-white">Character Gender</label>
+                    <select class="capitalize bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5" name="characterGender" id="characterGender" th:field="*{characterGender}">
+                        <option class="capitalize text-white" th:each="gender : ${T(org.data.redroleplay.enums.CharacterGender).values()}" th:value="${gender}" th:text="${gender.toString().toLowerCase()}"></option>
+                    </select>
+                    <p class="mt-2 text-sm text-red-500" th:if="${#fields.hasErrors('characterGender')}" th:errors="*{characterGender}"></p>
+                </div>
+
+                <div>
+                    <label for="characterOrientation" class="block mb-2 text-sm font-medium text-white">Character Orientation</label>
+                    <select class="capitalize bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5" name="characterOrientation" id="characterOrientation" th:field="*{characterOrientation}">
+                        <option class="capitalize text-white" th:each="orientation : ${T(org.data.redroleplay.enums.CharacterOrientation).values()}" th:value="${orientation}" th:text="${orientation.toString().toLowerCase()}"></option>
+                    </select>
+                    <p class="mt-2 text-sm text-red-500" th:if="${#fields.hasErrors('characterOrientation')}" th:errors="*{characterOrientation}"></p>
+                </div>
+            </div>
+            <div class="mb-6">
+                <label for="characterStory" class="block mb-2 text-sm font-medium text-white">Character Story <span class="font-small text-red-600">(Minimum 100 characters)</span></label>
+                <textarea th:field="*{characterStory}" rows="8" type="text" id="characterStory" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5" required placeholder="Example: Meet Vinny 'The Viper' Santoro, a notorious gangster whose reputation precedes him wherever he goes. With a face like stone and eyes as cold as ice, Vinny strikes fear into the hearts of even the bravest souls..."></textarea>
+                <p class="mt-2 text-sm text-red-500" th:if="${#fields.hasErrors('characterStory')}" th:errors="*{characterStory}"></p>
+            </div>
+            <button type="submit" class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-800">Apply</button>
+        </form>
+
     </div>
 
-    <div th:replace="~{template :: scripts}"></div>
+</div>
+
+<div th:replace="~{template :: scripts}"></div>
 
 </body>
 </html>
