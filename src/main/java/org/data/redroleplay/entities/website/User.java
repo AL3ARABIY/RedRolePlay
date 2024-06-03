@@ -66,4 +66,7 @@ public class User {
                     name = "authority_id", referencedColumnName = "id"))
 
     private Collection<Authority> authorities;
+
+    @Column(columnDefinition = "integer default 5")
+    private Integer maxWhitelistRequests;
 }
