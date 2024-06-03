@@ -45,11 +45,12 @@ public class SecurityConfig  {
                 )
                 .formLogin(login -> login
                         .loginPage("/login")
+                        .failureUrl("/login?error=Invalid username or password.")
                         .defaultSuccessUrl("/home", true)
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/login?logout&success=You have been logged out.")
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
