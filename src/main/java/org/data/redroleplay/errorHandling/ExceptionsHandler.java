@@ -38,4 +38,9 @@ public class ExceptionsHandler {
         return "error";
     }
 
+    @ExceptionHandler(RedirectException.class)
+    public String handleRedirectException(RedirectException ex) {
+        return "redirect:" + ex.getRedirectUrl();
+    }
+
 }

@@ -115,7 +115,7 @@ public class WhiteListRequestController {
 
         whitelistRequestService.save(whitelistRequestDto);
 
-        return "redirect:/whitelist?successRequest";
+        return "redirect:/whitelist?success=Your request sent successfully";
     }
 
 }

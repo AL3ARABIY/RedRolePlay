@@ -6,6 +6,7 @@ import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
 import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
+import org.data.redroleplay.errorHandling.costums.RedirectException;
 import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
 import org.data.redroleplay.errorHandling.costums.ValidationException;
 import org.data.redroleplay.repositories.website.WhitelistRequestRepository;
@@ -65,7 +66,7 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
                 .orElseThrow(() -> new RecordNotFoundException("Whitelist request not found"));
 
         if(fetchedWhitelistRequest.getStatus() != WhitelistRequestStatus.PENDING){
-            throw new ValidationException("Whitelist request already verified");
+            throw new RedirectException(String.format("/admin/whitelist/request/details/%d?error=A white lister has already verified this request", id));
         }
 
         authenticationService.getAuthenticatedUser()
