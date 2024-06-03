@@ -24,18 +24,18 @@
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label for="status"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                               class="block mb-2 text-sm font-medium text-white">
                             Status
                         </label>
-                        <select class="capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                        <select class="capitalize border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-red-500 focus:border-red-500"
                                 name="status"
                                 id="status"
                                 th:field="*{status}">
-                            <option class="capitalize text-gray-900 dark:text-white"
+                            <option class="capitalize text-white"
                                     th:value="${T(org.data.redroleplay.enums.WhitelistRequestStatus).ACCEPTED.name()}"
                             >Accept</option>
 
-                            <option class="capitalize text-gray-900 dark:text-white"
+                            <option class="capitalize text-white"
                                     th:value="${T(org.data.redroleplay.enums.WhitelistRequestStatus).DENIED.name()}"
                             >Reject</option>
                         </select>
@@ -45,14 +45,14 @@
                 </div>
                 <div class="mb-6">
                     <label for="note"
-                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                           class="block mb-2 text-sm font-medium text-white">
                         Note <span class="font-small text-red-600">(Not Required)</span>
                     </label>
                     <textarea th:field="*{note}" rows="2"
                               type="text"
                               name="note"
                               id="note"
-                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                              class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-red-500 focus:border-red-500"
                     >
                     </textarea>
                     <p class="mt-2 text-sm text-red-600 dark:text-red-500"
@@ -60,13 +60,13 @@
                 </div>
                 <div class="mb-6">
                     <label for="reason"
-                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                           class="block mb-2 text-sm font-medium text-white">
                         Reason <span class="font-small text-red-600">(Minimum 10 characters)</span>
                     </label>
                     <textarea th:field="*{reason}" rows="4"
                            type="text" name="reason"
                            id="reason"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                           class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-red-500 focus:border-red-500"
                            required
                     >
                     </textarea>
