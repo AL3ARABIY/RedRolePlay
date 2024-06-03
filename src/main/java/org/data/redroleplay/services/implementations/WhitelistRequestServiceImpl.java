@@ -3,6 +3,7 @@ package org.data.redroleplay.services.implementations;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.whiteListRequest.VerifyWhitelistRequestDto;
 import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
+import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
 import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
@@ -44,16 +45,13 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
         whitelistRequest.setRequestDate(LocalDateTime.now());
         whitelistRequest.setStatus(WhitelistRequestStatus.PENDING);
 
-        authenticationService.getAuthenticatedUser()
-                .ifPresentOrElse(
-                        whitelistRequest::setUser,
-                        () -> {
-                            throw new UserNeedAuthentication("You need to be authenticated to create a whitelist request");
-                        }
-                );
+        User authenticatedUser = authenticationService.getAuthenticatedUser()
+                .orElseThrow(() -> new UserNeedAuthentication("You need to be authenticated to create a whitelist request"));
 
-        if(whitelistRequestRepository.countByUserId(whitelistRequest.getUser().getId()) >= 5){
-            throw new ValidationException("You can't have more than 5 whitelist requests");
+        whitelistRequest.setUser(authenticatedUser);
+
+        if(whitelistRequestRepository.countByUserId(authenticatedUser.getId()) >= authenticatedUser.getMaxWhitelistRequests()){
+            throw new ValidationException(String.format("You have reached the maximum number of whitelist requests (%d)", authenticatedUser.getMaxWhitelistRequests()));
         }
 
         return whitelistRequestRepository.save(whitelistRequest);
@@ -138,7 +136,7 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
     @Override
     public boolean canAuthenticatedUserCreateRequest(){
         return authenticationService.getAuthenticatedUser()
-                .map(user -> whitelistRequestRepository.countByUserId(user.getId()) < 5)
+                .map(user -> whitelistRequestRepository.countByUserId(user.getId()) < user.getMaxWhitelistRequests())
                 .orElse(false);
     }
 }

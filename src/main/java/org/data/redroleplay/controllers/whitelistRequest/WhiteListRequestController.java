@@ -74,8 +74,11 @@ public class WhiteListRequestController {
     @GetMapping("/request")
     public String showUserWhitelistRequestPage(Model model) {
 
+        User authenticatedUser = authenticationService.getAuthenticatedUser()
+                .orElseThrow(() -> new UserNeedAuthentication("User not authenticated"));
+
         if(!whitelistRequestService.canAuthenticatedUserCreateRequest()){
-            throw new UserNeedAuthorisation("You can't create more than 5 whitelist requests");
+            throw new UserNeedAuthorisation(String.format("You can't create more than %d whitelist requests",authenticatedUser.getMaxWhitelistRequests()));
         }
 
         model.addAttribute("whitelistRequest", whitelistRequestDto);
