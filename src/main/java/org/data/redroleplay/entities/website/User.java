@@ -24,7 +24,7 @@ public class User {
 
     private String lastName;
 
-    @Formula("concat(firstName, ' ', lastName)")
+    @Formula("concat(firstName, '_', lastName)")
     private String fullName;
 
     private LocalDate birthDate;

@@ -11,6 +11,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WhitelistRequestRepository extends JpaRepository<WhitelistRequest, Long>{
 
+    Page<WhitelistRequest> findAllById(Long id , Pageable pageable);
+
+    Page<WhitelistRequest> findAllByCharacterFullName(String characterFullName , Pageable pageable);
+
+    @Query("SELECT wr FROM WhitelistRequest wr WHERE wr.user.fullName LIKE %:userFullName%")
+    Page<WhitelistRequest> findAllByUserFullName(String userFullName , Pageable pageable);
+
     Page<WhitelistRequest> findAllByUserId(Long userId , Pageable pageable);
 
     Page<WhitelistRequest> findAllByStatus(WhitelistRequestStatus status , Pageable pageable);

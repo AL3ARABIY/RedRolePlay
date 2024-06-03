@@ -117,7 +117,19 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
     public Page<WhitelistRequest> getAll(Integer page, Integer size){
         return whitelistRequestRepository.findAll(PageRequest.of(page, size));
     }
+    @Override
+    public Page<WhitelistRequest> getAllById(Long id , Integer page, Integer size){
+        return whitelistRequestRepository.findAllById(id, PageRequest.of(page, size));
+    }
 
+    @Override
+    public Page<WhitelistRequest> getAllByCharacterFullName(String characterFullName , Integer page, Integer size){
+        return whitelistRequestRepository.findAllByCharacterFullName(characterFullName, PageRequest.of(page, size));
+    }
+    @Override
+    public Page<WhitelistRequest> getAllByUserFullName(String userFullName , Integer page, Integer size){
+        return whitelistRequestRepository.findAllByUserFullName(userFullName, PageRequest.of(page, size));
+    }
     @Override
     public boolean existsByCharacterFirstNameAndCharacterLastName(String characterFirstName, String characterLastName){
         return whitelistRequestRepository.existsByCharacterFirstNameAndCharacterLastName(characterFirstName, characterLastName);
