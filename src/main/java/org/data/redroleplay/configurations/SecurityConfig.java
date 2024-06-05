@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.enums.BaseAuthority;
 import org.data.redroleplay.filters.LoginPageFilter;
 import org.data.redroleplay.filters.RegistrationPageFilter;
+import org.data.redroleplay.handlers.CustomAuthenticationSuccessHandler;
 import org.data.redroleplay.services.implementations.SecurityUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -22,6 +24,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig  {
 
     private final SecurityUserDetailsService securityUserDetailsService;
+
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -50,6 +54,7 @@ public class SecurityConfig  {
                         .loginPage("/login")
                         .failureUrl("/login?error=Invalid username or password.")
                         .defaultSuccessUrl("/home", true)
+                        .successHandler(customAuthenticationSuccessHandler)
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
