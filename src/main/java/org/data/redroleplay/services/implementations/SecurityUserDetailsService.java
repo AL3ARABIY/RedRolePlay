@@ -3,7 +3,7 @@ package org.data.redroleplay.services.implementations;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.entities.website.Authority;
 import org.data.redroleplay.entities.website.User;
-import org.data.redroleplay.services.UserService;
+import org.data.redroleplay.repositories.website.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +18,12 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class SecurityUserDetailsService implements UserDetailsService {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userService.getUserByUsername(username)
+        User user = userRepository.findByMtaUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
 
         return new org.springframework.security.core.userdetails.User(
