@@ -2,6 +2,7 @@ package org.data.redroleplay.configurations;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.enums.BaseAuthority;
+import org.data.redroleplay.filters.IpCheckFilter;
 import org.data.redroleplay.filters.LoginPageFilter;
 import org.data.redroleplay.filters.RegistrationPageFilter;
 import org.data.redroleplay.handlers.CustomAuthenticationSuccessHandler;
@@ -30,12 +31,16 @@ public class SecurityConfig  {
 
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
+    private final IpCheckFilter ipCheckFilter;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.addFilterBefore(new LoginPageFilter(), DefaultLoginPageGeneratingFilter.class);
 
         http.addFilterBefore(new RegistrationPageFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        http.addFilterAfter(ipCheckFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http
                 .authorizeHttpRequests(
@@ -54,7 +59,7 @@ public class SecurityConfig  {
                                 .anyRequest().hasAuthority(BaseAuthority.SIMPLE_ACCESS.name())
                 )
                 .sessionManagement(session -> session
-                        .invalidSessionUrl("/login?error=Invalid session.")
+//                        .invalidSessionUrl("/login?error=Invalid session.")
                         .sessionAuthenticationErrorUrl("/login?error=Session authentication error.")
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                         .maximumSessions(1)
