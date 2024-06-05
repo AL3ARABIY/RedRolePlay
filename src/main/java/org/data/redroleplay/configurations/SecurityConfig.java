@@ -5,15 +5,18 @@ import org.data.redroleplay.enums.BaseAuthority;
 import org.data.redroleplay.filters.LoginPageFilter;
 import org.data.redroleplay.filters.RegistrationPageFilter;
 import org.data.redroleplay.handlers.CustomAuthenticationSuccessHandler;
+import org.data.redroleplay.handlers.CustomLogoutHandler;
 import org.data.redroleplay.services.implementations.SecurityUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -50,6 +53,15 @@ public class SecurityConfig  {
                                 ).hasAuthority(BaseAuthority.WHITE_LISTER.name())
                                 .anyRequest().hasAuthority(BaseAuthority.SIMPLE_ACCESS.name())
                 )
+                .sessionManagement(session -> session
+                        .invalidSessionUrl("/login?error=Invalid session.")
+                        .sessionAuthenticationErrorUrl("/login?error=Session authentication error.")
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(true)
+                        .expiredUrl("/login?error=Session expired.")
+                        .sessionRegistry(sessionRegistry())
+                )
                 .formLogin(login -> login
                         .loginPage("/login")
                         .failureUrl("/login?error=Invalid username or password.")
@@ -57,11 +69,13 @@ public class SecurityConfig  {
                         .successHandler(customAuthenticationSuccessHandler)
                 )
                 .logout(logout -> logout
+                        .deleteCookies("JSESSIONID")
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout&success=You have been logged out.")
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
+                        .addLogoutHandler(new CustomLogoutHandler(sessionRegistry()))
                 )
                 .build();
     }
@@ -77,6 +91,11 @@ public class SecurityConfig  {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
     }
 
 }
