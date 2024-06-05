@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface UserService{
     User save(UserRegistrationDto registrationDto);
 
+    User updateUserInfoOnLogin(String ipAddress);
+
     Optional<User> getUserByUsername(String username);
 
     Optional<User> getUserById(Long id);

@@ -69,4 +69,8 @@ public class User {
 
     @Column(columnDefinition = "integer default 5")
     private Integer maxWhitelistRequests;
+
+    private String lastLoginIp;
+
+    private LocalDateTime lastLoginDate;
 }

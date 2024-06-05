@@ -6,8 +6,10 @@ import org.data.redroleplay.entities.game.Account;
 import org.data.redroleplay.entities.website.Authority;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.enums.BaseAuthority;
+import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
 import org.data.redroleplay.repositories.website.UserRepository;
 import org.data.redroleplay.services.AccountService;
+import org.data.redroleplay.services.AuthenticationService;
 import org.data.redroleplay.services.PasswordHasher;
 import org.data.redroleplay.services.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +29,8 @@ public class UserServiceImpl implements UserService {
     private final PasswordHasher passwordHasher;
 
     private final AccountService accountService;
+
+    private final AuthenticationService authenticationService;
 
     @Override
     @Transactional
@@ -57,6 +61,17 @@ public class UserServiceImpl implements UserService {
         Account savedAccount = accountService.save(user);
 
         user.setAccountId(savedAccount.getId());
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateUserInfoOnLogin(String ipAddress) {
+        User user = authenticationService.getAuthenticatedUser()
+                .orElseThrow(() -> new UserNeedAuthentication("User need to be authenticated to update his info"));
+
+        user.setLastLoginDate(LocalDateTime.now());
+        user.setLastLoginIp(ipAddress);
 
         return userRepository.save(user);
     }
