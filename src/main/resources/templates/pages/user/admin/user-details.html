@@ -9,11 +9,11 @@
 
     <nav th:replace="~{template :: navbar}"></nav>
 
-    <div class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
+    <div th:object="${user}" class="h-full flex flex-col items-center justify-center px-4 pt-8 mx-auto md:h-screen pt:mt-0 bg-gray-900">
         <div th:replace="~{template :: toasts}"></div>
 
         <!-- Card -->
-        <div th:object="${user}" class="max-h-96 overflow-y-auto w-3/4 p-6 space-y-6 sm:p-8 rounded-lg shadow bg-gray-800">
+        <div class="max-h-96 overflow-y-auto w-3/4 p-6 space-y-6 sm:p-8 rounded-lg shadow bg-gray-800">
             <div class="w-full flex items-center justify-between flex-wrap">
                 <div class="flex items-center">
                     <div class="mr-2 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
@@ -66,6 +66,7 @@
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-red-500 focus:border-red-500"
                            disabled
                            required />
+
                 </div>
                 <div>
                     <label for="email"
@@ -95,6 +96,11 @@
                     <label for="mtaSerial"
                            class="block mb-2 text-sm font-medium text-gray-900 text-white">
                         Mta Serial
+                        <a sec:authorize="hasAuthority('ADMIN')"
+                           class="mt-2 text-sm font-medium text-red-600"
+                           th:href="@{'/admin/user/change-serial' + ${id}}">
+                            Change
+                        </a>
                     </label>
                     <input th:value="*{mtaSerial}"
                            type="text"
@@ -150,6 +156,15 @@
                            disabled
                            required />
                 </div>
+            </div>
+            <div sec:authorize="hasAuthority('ADMIN')"
+                 class="flex items-start mb-6">
+                <label class="ms-2 text-sm font-medium text-gray-300">
+                    Did this user forget his password?
+                    <a th:href="@{'/admin/user/reset-password/' + ${id}}" class="text-red-500 hover:underline">
+                        Reset Password
+                    </a>.
+                </label>
             </div>
         </div>
     </div>
