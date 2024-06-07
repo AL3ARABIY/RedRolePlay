@@ -2,10 +2,12 @@ package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.UserRegistrationDto;
+import org.data.redroleplay.dtos.user.UpdateUserMtaSerialRequestDto;
 import org.data.redroleplay.entities.game.Account;
 import org.data.redroleplay.entities.website.Authority;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.enums.BaseAuthority;
+import org.data.redroleplay.error_handling.costums.RecordNotFoundException;
 import org.data.redroleplay.error_handling.costums.UserNeedAuthentication;
 import org.data.redroleplay.repositories.website.UserRepository;
 import org.data.redroleplay.services.AccountService;
@@ -74,6 +76,19 @@ public class UserServiceImpl implements UserService {
         user.setLastLoginIp(ipAddress);
 
         return userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateUserMtaSerial(UpdateUserMtaSerialRequestDto request){
+        User user = getUserById(request.getUserId())
+                .orElseThrow(() -> new RecordNotFoundException(String.format("User with id %d not found", request.getUserId())));
+
+        user.setMtaSerial(request.getMtaSerial());
+
+        userRepository.save(user);
+
+        accountService.updateUserMtaSerial(request.getMtaSerial(), user.getAccountId());
     }
 
     @Override

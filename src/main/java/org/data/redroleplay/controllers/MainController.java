@@ -1,7 +1,6 @@
 package org.data.redroleplay.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.data.redroleplay.services.implementations.ProfileService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class MainController {
 
-    private final ProfileService profileService;
     @GetMapping("/login")
     public String login() {
         return "pages/login";
