@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void updateUserMtaSerial(String mtaSerial, Long accountId) {
+    public void updateAccountMtaSerial(String mtaSerial, Long accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new RecordNotFoundException(String.format("Account with id %d not found", accountId)));
         account.setMtaSerial(mtaSerial);
@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void updateUserPassword(String hashedPassword,String salt, Long accountId) {
+    public void updateAccountPassword(String hashedPassword, String salt, Long accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new RecordNotFoundException(String.format("Account with id %d not found", accountId)));
         account.setPassword(hashedPassword);

@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        accountService.updateUserMtaSerial(request.getMtaSerial(), user.getAccountId());
+        accountService.updateAccountMtaSerial(request.getMtaSerial(), user.getAccountId());
     }
 
     @Override
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        accountService.updateUserPassword(hashedPassword, salt, user.getAccountId());
+        accountService.updateAccountPassword(hashedPassword, salt, user.getAccountId());
     }
 
     @Override
