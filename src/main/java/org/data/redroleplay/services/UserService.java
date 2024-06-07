@@ -2,6 +2,7 @@ package org.data.redroleplay.services;
 
 import org.data.redroleplay.dtos.UserRegistrationDto;
 import org.data.redroleplay.dtos.user.UpdateUserMtaSerialRequestDto;
+import org.data.redroleplay.dtos.user.UpdateUserResetPasswordRequestDto;
 import org.data.redroleplay.entities.website.User;
 
 import java.util.Optional;
@@ -16,6 +17,8 @@ public interface UserService{
     Optional<User> getUserById(Long id);
 
     void updateUserMtaSerial(UpdateUserMtaSerialRequestDto request);
+
+    void updateUserPassword(UpdateUserResetPasswordRequestDto request);
 
     boolean existsByEmail(String email);
 

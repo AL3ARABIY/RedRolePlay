@@ -3,6 +3,7 @@ package org.data.redroleplay.services.implementations;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.UserRegistrationDto;
 import org.data.redroleplay.dtos.user.UpdateUserMtaSerialRequestDto;
+import org.data.redroleplay.dtos.user.UpdateUserResetPasswordRequestDto;
 import org.data.redroleplay.entities.game.Account;
 import org.data.redroleplay.entities.website.Authority;
 import org.data.redroleplay.entities.website.User;
@@ -89,6 +90,27 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         accountService.updateUserMtaSerial(request.getMtaSerial(), user.getAccountId());
+    }
+
+    @Override
+    @Transactional
+    public void updateUserPassword(UpdateUserResetPasswordRequestDto request){
+
+        User user = getUserById(request.getUserId())
+                .orElseThrow(() -> new RecordNotFoundException(String.format("User with id %d not found", request.getUserId())));
+
+        String salt = passwordHasher.generateSalt();
+        String hashedPassword = passwordHasher.generateHashedPassword(
+                request.getNewPassword(), salt
+        );
+
+        user.setSalt(salt);
+        user.setPassword(new BCryptPasswordEncoder().encode(request.getNewPassword()));
+        user.setMtaPassword(hashedPassword);
+
+        userRepository.save(user);
+
+        accountService.updateUserPassword(hashedPassword, salt, user.getAccountId());
     }
 
     @Override

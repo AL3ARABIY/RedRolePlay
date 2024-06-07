@@ -42,6 +42,15 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public void updateUserPassword(String hashedPassword,String salt, Long accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new RecordNotFoundException(String.format("Account with id %d not found", accountId)));
+        account.setPassword(hashedPassword);
+        account.setSalt(salt);
+        accountRepository.save(account);
+    }
+
+    @Override
     public Optional<Account> getAccountById(Long id) {
         return accountRepository.findById(id);
     }

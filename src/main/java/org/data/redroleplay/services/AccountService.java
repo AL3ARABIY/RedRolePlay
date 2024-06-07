@@ -11,4 +11,6 @@ public interface AccountService {
     Optional<Account> getAccountById(Long id);
 
     void updateUserMtaSerial(String mtaSerial, Long accountId);
+
+    void updateUserPassword(String hashedPassword, String salt, Long accountId);
 }
