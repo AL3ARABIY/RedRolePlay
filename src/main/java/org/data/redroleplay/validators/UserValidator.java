@@ -23,23 +23,23 @@ public class UserValidator implements Validator {
 
         UserRegistrationDto user = (UserRegistrationDto) target;
 
-        if (userService.existsByMtaUsername(user.getMtaUsername())) {
+        if (Boolean.TRUE.equals(userService.existsByMtaUsername(user.getMtaUsername()))) {
             errors.rejectValue("mtaUsername", "Duplicate.user.mtaUsername");
         }
 
-        if (userService.existsByEmail(user.getEmail())) {
+        if (Boolean.TRUE.equals(userService.existsByEmail(user.getEmail()))) {
             errors.rejectValue("email", "Duplicate.user.email");
         }
 
-        if (userService.existsByDiscordId(user.getDiscordId())) {
+        if (Boolean.TRUE.equals(userService.existsByDiscordId(user.getDiscordId()))) {
             errors.rejectValue("discordId", "Duplicate.user.discordId");
         }
 
-        if (userService.existsByMtaSerial(user.getMtaSerial())) {
+        if (Boolean.TRUE.equals(userService.existsByMtaSerial(user.getMtaSerial()))) {
             errors.rejectValue("mtaSerial", "Duplicate.user.mtaSerial");
         }
 
-        if(userService.existsByDiscordUsername(user.getDiscordUsername())){
+        if(Boolean.TRUE.equals(userService.existsByDiscordUsername(user.getDiscordUsername()))){
             errors.rejectValue("discordUsername", "Duplicate.user.discordUsername");
         }
     }

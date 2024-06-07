@@ -1,4 +1,4 @@
-package org.data.redroleplay.commandLineRunner;
+package org.data.redroleplay.commandline_runners;
 
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.entities.website.Authority;

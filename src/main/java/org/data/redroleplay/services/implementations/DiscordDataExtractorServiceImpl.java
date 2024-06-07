@@ -12,12 +12,14 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
 public class DiscordDataExtractorServiceImpl implements DiscordDataExtractorService {
 
     private final DiscordConfiguration discordConfiguration;
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
 
     @Override
@@ -25,7 +27,7 @@ public class DiscordDataExtractorServiceImpl implements DiscordDataExtractorServ
 
         try {
             if (code == null || code.isEmpty()) {
-                System.err.println("Authorization code not found in URL");
+                logger.warning("Authorization code not found in URL");
                 return Optional.empty();
             }
 
@@ -52,7 +54,7 @@ public class DiscordDataExtractorServiceImpl implements DiscordDataExtractorServ
             AccessTokenResponse response = restTemplate.postForObject(tokenUri, request, AccessTokenResponse.class);
 
             if (response == null || response.getAccess_token() == null) {
-                System.err.println("Error exchanging code for access token");
+                logger.warning("Error exchanging code for access token");
                 return Optional.empty();
             }
 
@@ -67,7 +69,7 @@ public class DiscordDataExtractorServiceImpl implements DiscordDataExtractorServ
 
             return user == null ? Optional.empty() : Optional.of(user);
         } catch (Exception e) {
-            System.err.println("Error getting user info from Discord: " + e.getMessage());
+            logger.warning("Error getting user info from Discord: " + e.getMessage());
             return Optional.empty();
         }
 

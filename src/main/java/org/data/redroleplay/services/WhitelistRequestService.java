@@ -1,11 +1,10 @@
 package org.data.redroleplay.services;
 
-import org.data.redroleplay.dtos.whiteListRequest.VerifyWhitelistRequestDto;
-import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
+import org.data.redroleplay.dtos.whitelistrequest.VerifyWhitelistRequestDto;
+import org.data.redroleplay.dtos.whitelistrequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 

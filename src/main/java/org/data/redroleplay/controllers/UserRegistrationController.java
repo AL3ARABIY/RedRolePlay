@@ -31,6 +31,8 @@ public class UserRegistrationController {
 
     private final DiscordDataExtractorService discordDataExtractorService;
 
+    private static final String REGISTRATION_PAGE = "pages/registration";
+
     private UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
 
     @InitBinder
@@ -52,7 +54,7 @@ public class UserRegistrationController {
 
         model.addAttribute("ShowDiscordButton", true);
 
-        return "pages/registration";
+        return REGISTRATION_PAGE;
     }
 
     @GetMapping
@@ -74,7 +76,7 @@ public class UserRegistrationController {
 
         }, () -> model.addAttribute("ShowFailingMessage", true));
 
-        return "pages/registration";
+        return REGISTRATION_PAGE;
     }
 
     @PostMapping
@@ -86,7 +88,7 @@ public class UserRegistrationController {
 
         if(result.hasErrors()) {
             model.addAttribute("ShowRegistrationForm", true);
-            return "pages/registration";
+            return REGISTRATION_PAGE;
         }
 
         userService.save(registrationDto);

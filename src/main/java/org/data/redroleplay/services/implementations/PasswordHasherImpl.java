@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 @Service
 public class PasswordHasherImpl implements PasswordHasher {
 
+        private final Random random = new Random();
+
         @Override
         public String generateHashedPassword(String password, String salt) {
             String step1 = md5(password) + salt;
@@ -26,7 +28,6 @@ public class PasswordHasherImpl implements PasswordHasher {
         @Override
         public String generateSalt() {
             StringBuilder encryptionRule = new StringBuilder();
-            Random random = new Random();
             IntStream.range(0, 10).forEach(i -> encryptionRule.append(random.nextInt(10)));
             return encryptionRule.toString();
         }

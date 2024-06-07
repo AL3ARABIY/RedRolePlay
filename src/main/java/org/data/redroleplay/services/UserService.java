@@ -14,15 +14,15 @@ public interface UserService{
 
     Optional<User> getUserById(Long id);
 
-    Boolean existsByEmail(String email);
+    boolean existsByEmail(String email);
 
-    Boolean existsByMtaUsername(String mtUsername);
+    boolean existsByMtaUsername(String mtUsername);
 
-    Boolean existsByDiscordId(String discordId);
+    boolean existsByDiscordId(String discordId);
 
-    Boolean existsByMtaSerial(String mtaSerial);
+    boolean existsByMtaSerial(String mtaSerial);
 
-    Boolean existsByDiscordUsername(String discordUsername);
+    boolean existsByDiscordUsername(String discordUsername);
 
-    Boolean existsById(Long id);
+    boolean existsById(Long id);
 }

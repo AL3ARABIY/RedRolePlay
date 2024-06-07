@@ -1,4 +1,4 @@
-package org.data.redroleplay.dtos.whiteListRequest;
+package org.data.redroleplay.dtos.whitelistrequest;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -21,11 +21,11 @@ import java.time.LocalDate;
 public class WhitelistRequestDto {
 
     @NotNull(message = "{Field.required}")
-    @Pattern(regexp = "^[A-Z][a-z]{1,}$", message = "{Field.simple}")
+    @Pattern(regexp = "^[A-Z][a-z]+$", message = "{Field.simple}")
     private String characterFirstName;
 
     @NotNull(message = "{Field.required}")
-    @Pattern(regexp = "^[A-Z][a-z]{1,}$", message = "{Field.simple}")
+    @Pattern(regexp = "^[A-Z][a-z]+$", message = "{Field.simple}")
     private String characterLastName;
 
     @NotNull(message = "{Field.required}")

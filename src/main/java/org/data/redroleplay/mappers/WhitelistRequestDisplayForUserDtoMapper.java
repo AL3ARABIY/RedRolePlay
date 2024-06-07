@@ -2,7 +2,7 @@ package org.data.redroleplay.mappers;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForUserDto;
+import org.data.redroleplay.dtos.whitelistrequest.WhitelistRequestDisplayForUserDto;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

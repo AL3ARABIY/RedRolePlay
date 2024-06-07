@@ -1,14 +1,9 @@
-package org.data.redroleplay.dtos.whiteListRequest;
+package org.data.redroleplay.dtos.whitelistrequest;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.enums.CharacterGender;
 import org.data.redroleplay.enums.CharacterOrientation;
 import org.data.redroleplay.enums.WhitelistRequestStatus;

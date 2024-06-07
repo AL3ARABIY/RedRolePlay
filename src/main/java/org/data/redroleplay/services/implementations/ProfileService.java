@@ -5,9 +5,6 @@ import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.models.UserProfile;
 import org.data.redroleplay.services.UserService;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,8 +17,6 @@ public class ProfileService {
 
     @Cacheable("profileCache")
     public UserProfile getUserProfile(org.springframework.security.core.userdetails.User userDetails) {
-
-//        if(authentication == null) return getDefaultUserProfile();
 
         Optional<User> authenticatedUser = userService.getUserByUsername(userDetails.getUsername());
 

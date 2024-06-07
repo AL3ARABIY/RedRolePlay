@@ -6,9 +6,6 @@ import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.repositories.game.AccountRepository;
 import org.data.redroleplay.services.AccountService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

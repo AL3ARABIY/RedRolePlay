@@ -6,9 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.entities.website.User;
-import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
+
 import org.data.redroleplay.services.AuthenticationService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -37,7 +36,7 @@ public class IpCheckFilter extends OncePerRequestFilter {
                 response.sendRedirect("/logout?error=IP changed, please login again.");
                 return;
             }
-        };
+        }
 
 
 

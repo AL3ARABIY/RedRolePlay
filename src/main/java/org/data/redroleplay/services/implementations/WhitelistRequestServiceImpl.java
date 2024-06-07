@@ -1,15 +1,15 @@
 package org.data.redroleplay.services.implementations;
 
 import lombok.RequiredArgsConstructor;
-import org.data.redroleplay.dtos.whiteListRequest.VerifyWhitelistRequestDto;
-import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
+import org.data.redroleplay.dtos.whitelistrequest.VerifyWhitelistRequestDto;
+import org.data.redroleplay.dtos.whitelistrequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
-import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
-import org.data.redroleplay.errorHandling.costums.RedirectException;
-import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
-import org.data.redroleplay.errorHandling.costums.ValidationException;
+import org.data.redroleplay.error_handling.costums.RecordNotFoundException;
+import org.data.redroleplay.error_handling.costums.RedirectException;
+import org.data.redroleplay.error_handling.costums.UserNeedAuthentication;
+import org.data.redroleplay.error_handling.costums.ValidationException;
 import org.data.redroleplay.repositories.website.WhitelistRequestRepository;
 
 import org.data.redroleplay.services.AuthenticationService;
@@ -96,13 +96,13 @@ public class WhitelistRequestServiceImpl implements WhitelistRequestService {
 
     @Override
     public Page<WhitelistRequest> getAllByUserId(Long userId, Integer page, Integer size){
-        if(!userService.existsById(userId)) throw new RecordNotFoundException("User not found");
+        if(Boolean.FALSE.equals(userService.existsById(userId))) throw new RecordNotFoundException("User not found");
         return whitelistRequestRepository.findAllByUserId(userId, PageRequest.of(page, size));
     }
 
     @Override
     public Page<WhitelistRequest> getAllByUserIdAndStatus(Long userId, WhitelistRequestStatus status, Integer page, Integer size){
-        if(!userService.existsById(userId)) throw new RecordNotFoundException("User not found");
+        if(Boolean.FALSE.equals(userService.existsById(userId))) throw new RecordNotFoundException("User not found");
         return whitelistRequestRepository.findAllByUserIdAndStatus(userId ,status, PageRequest.of(page, size));
     }
 

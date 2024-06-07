@@ -1,7 +1,7 @@
 package org.data.redroleplay.validators;
 
 import lombok.RequiredArgsConstructor;
-import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
+import org.data.redroleplay.dtos.whitelistrequest.WhitelistRequestDto;
 import org.data.redroleplay.services.WhitelistRequestService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

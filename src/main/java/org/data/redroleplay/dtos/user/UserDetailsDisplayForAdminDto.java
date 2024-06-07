@@ -1,6 +1,5 @@
 package org.data.redroleplay.dtos.user;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

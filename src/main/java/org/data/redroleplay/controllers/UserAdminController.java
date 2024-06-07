@@ -3,7 +3,7 @@ package org.data.redroleplay.controllers;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.user.UserDetailsDisplayForAdminDto;
 import org.data.redroleplay.entities.website.User;
-import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
+import org.data.redroleplay.error_handling.costums.RecordNotFoundException;
 import org.data.redroleplay.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Scope;

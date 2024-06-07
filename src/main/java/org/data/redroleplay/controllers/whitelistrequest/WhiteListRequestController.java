@@ -1,15 +1,15 @@
-package org.data.redroleplay.controllers.whitelistRequest;
+package org.data.redroleplay.controllers.whitelistrequest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDisplayForUserDto;
-import org.data.redroleplay.dtos.whiteListRequest.WhitelistRequestDto;
+import org.data.redroleplay.dtos.whitelistrequest.WhitelistRequestDisplayForUserDto;
+import org.data.redroleplay.dtos.whitelistrequest.WhitelistRequestDto;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.entities.website.WhitelistRequest;
 import org.data.redroleplay.enums.WhitelistRequestStatus;
-import org.data.redroleplay.errorHandling.costums.RecordNotFoundException;
-import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
-import org.data.redroleplay.errorHandling.costums.UserNeedAuthorisation;
+import org.data.redroleplay.error_handling.costums.RecordNotFoundException;
+import org.data.redroleplay.error_handling.costums.UserNeedAuthentication;
+import org.data.redroleplay.error_handling.costums.UserNeedAuthorisation;
 import org.data.redroleplay.mappers.WhitelistRequestDisplayForUserDtoMapper;
 import org.data.redroleplay.models.CustomPageResponse;
 import org.data.redroleplay.services.AuthenticationService;

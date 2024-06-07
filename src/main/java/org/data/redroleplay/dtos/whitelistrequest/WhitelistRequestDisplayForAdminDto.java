@@ -1,4 +1,4 @@
-package org.data.redroleplay.dtos.whiteListRequest;
+package org.data.redroleplay.dtos.whitelistrequest;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

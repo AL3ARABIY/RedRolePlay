@@ -1,10 +1,10 @@
-package org.data.redroleplay.errorHandling.costums;
+package org.data.redroleplay.error_handling.costums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RecordNotFoundException extends RuntimeException {
+public class UserNeedAuthentication extends RuntimeException {
     private final String error;
 }

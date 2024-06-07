@@ -1,4 +1,4 @@
-package org.data.redroleplay.errorHandling.costums;
+package org.data.redroleplay.error_handling.costums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

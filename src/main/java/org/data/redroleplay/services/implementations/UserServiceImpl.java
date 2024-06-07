@@ -6,7 +6,7 @@ import org.data.redroleplay.entities.game.Account;
 import org.data.redroleplay.entities.website.Authority;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.enums.BaseAuthority;
-import org.data.redroleplay.errorHandling.costums.UserNeedAuthentication;
+import org.data.redroleplay.error_handling.costums.UserNeedAuthentication;
 import org.data.redroleplay.repositories.website.UserRepository;
 import org.data.redroleplay.services.AccountService;
 import org.data.redroleplay.services.AuthenticationService;
@@ -86,32 +86,32 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
     @Override
-    public Boolean existsByEmail(String email){
+    public boolean existsByEmail(String email){
         return userRepository.existsByEmail(email);
     }
 
     @Override
-    public Boolean existsByMtaUsername(String mtUsername){
+    public boolean existsByMtaUsername(String mtUsername){
         return userRepository.existsByMtaUsername(mtUsername);
     }
 
     @Override
-    public Boolean existsByDiscordId(String discordId){
+    public boolean existsByDiscordId(String discordId){
         return userRepository.existsByDiscordId(discordId);
     }
 
     @Override
-    public Boolean existsByMtaSerial(String mtaSerial){
+    public boolean existsByMtaSerial(String mtaSerial){
         return userRepository.existsByMtaSerial(mtaSerial);
     }
 
     @Override
-    public Boolean existsByDiscordUsername(String discordUsername){
+    public boolean existsByDiscordUsername(String discordUsername){
         return  userRepository.existsByDiscordUsername(discordUsername);
     }
 
     @Override
-    public Boolean existsById(Long id){
+    public boolean existsById(Long id){
         return userRepository.existsById(id);
     }
 }
