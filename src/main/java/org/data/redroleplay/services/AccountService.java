@@ -10,7 +10,7 @@ public interface AccountService {
 
     Optional<Account> getAccountById(Long id);
 
-    void updateUserMtaSerial(String mtaSerial, Long accountId);
+    void updateAccountMtaSerial(String mtaSerial, Long accountId);
 
-    void updateUserPassword(String hashedPassword, String salt, Long accountId);
+    void updateAccountPassword(String hashedPassword, String salt, Long accountId);
 }
