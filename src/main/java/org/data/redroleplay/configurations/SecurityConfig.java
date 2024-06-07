@@ -56,6 +56,9 @@ public class SecurityConfig  {
                                         "/admin/whitelist/**",
                                         "/admin/user/details/**"
                                 ).hasAuthority(BaseAuthority.WHITE_LISTER.name())
+                                .requestMatchers(
+                                        "/admin/user/**"
+                                ).hasAuthority(BaseAuthority.ADMIN.name())
                                 .anyRequest().hasAuthority(BaseAuthority.SIMPLE_ACCESS.name())
                 )
                 .sessionManagement(session -> session
