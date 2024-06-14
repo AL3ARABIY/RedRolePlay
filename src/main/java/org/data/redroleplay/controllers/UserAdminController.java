@@ -3,6 +3,7 @@ package org.data.redroleplay.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.data.redroleplay.dtos.user.UpdateUserMtaSerialRequestDto;
+import org.data.redroleplay.dtos.user.UpdateUserResetPasswordRequestDto;
 import org.data.redroleplay.dtos.user.UserDetailsDisplayForAdminDto;
 import org.data.redroleplay.entities.website.User;
 import org.data.redroleplay.error_handling.costums.RecordNotFoundException;
@@ -26,11 +27,18 @@ public class UserAdminController {
     private final MtaSerialValidator mtaSerialValidator;
     private final UpdateUserMtaSerialRequestDto updateUserMtaSerialRequest = new UpdateUserMtaSerialRequestDto();
 
+    private final UpdateUserResetPasswordRequestDto updateUserResetPasswordRequest = new UpdateUserResetPasswordRequestDto();
+
     private final ModelMapper modelMapper = new ModelMapper();
 
     @ModelAttribute("updateUserMtaSerialRequest")
     public UpdateUserMtaSerialRequestDto updateUserMtaSerialRequest() {
         return updateUserMtaSerialRequest;
+    }
+
+    @ModelAttribute("updateUserResetPasswordRequest")
+    public UpdateUserResetPasswordRequestDto updateUserResetPasswordRequest() {
+        return updateUserResetPasswordRequest;
     }
 
     @GetMapping("/details/{id}")
@@ -47,6 +55,39 @@ public class UserAdminController {
         model.addAttribute("user", userDetailsDisplayForAdminDto);
 
         return "pages/user/admin/user-details";
+    }
+
+    @GetMapping("/reset-password/{id}")
+    public String resetPassword(
+            @PathVariable("id") Long id,
+            Model model
+    ) {
+
+        User user = userService.getUserById(id)
+                .orElseThrow(() -> new RecordNotFoundException(String.format("User with id %d not found", id)));
+
+        updateUserResetPasswordRequest.setUserId(id);
+        updateUserResetPasswordRequest.setNewPassword(user.getMtaUsername() + "123");
+        model.addAttribute("updateUserResetPasswordRequest", updateUserResetPasswordRequest);
+
+        return "pages/user/admin/reset-password";
+    }
+
+    @PostMapping("/reset-password")
+    public String resetPassword(
+            @Valid @ModelAttribute("updateUserResetPasswordRequest") UpdateUserResetPasswordRequestDto updateUserResetPasswordRequest,
+            BindingResult result,
+            Model model
+    ) {
+
+        if(result.hasErrors()) {
+            model.addAttribute("updateUserResetPasswordRequest", updateUserResetPasswordRequest);
+            return "pages/user/admin/reset-password";
+        }
+
+        userService.updateUserPassword(updateUserResetPasswordRequest);
+
+        return "redirect:/admin/user/details/" + updateUserResetPasswordRequest.getUserId() + "?success=Password reseted successfully";
     }
 
     @GetMapping("/change-serial/{id}")
