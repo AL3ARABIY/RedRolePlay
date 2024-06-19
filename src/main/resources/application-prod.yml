@@ -7,8 +7,8 @@ spring:
       driverClassName: com.mysql.cj.jdbc.Driver
     game:
       jdbcUrl: ${GAME_DATABASE_URL:}
-      username: ${GAME_DATABASE_USERNAME:u121_ngn9FXPhIg}
-      password: ${GAME_DATABASE_PASSWORD:M=gMW+JhntbU.umbaC1hsE47}
+      username: ${GAME_DATABASE_USERNAME:}
+      password: ${GAME_DATABASE_PASSWORD:}
       driverClassName: com.mysql.cj.jdbc.Driver
 
 discord:
